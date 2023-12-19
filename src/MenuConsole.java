@@ -1,12 +1,18 @@
 import java.util.Scanner;
 
 /**
- * This class creates a menu console
+ * This class creates a menu console to select the options
  */
 public class MenuConsole {
-
+    /**
+     * Food Product class
+     * @method: deleteProduct
+     */
+    FoodProduct foodProduct = new FoodProduct();
     void displayMenu(){
         Scanner in = new Scanner(System.in);
+        int selected;
+        do{
         System.out.println("_____________________");
         System.out.println("The Food Store");
         System.out.println("Choose from these options");
@@ -18,9 +24,9 @@ public class MenuConsole {
         System.out.println("[5] Delete a product by ID");
         System.out.println("[6] Exit");
 
-        int selected = in.nextInt();
+        selected= in.nextInt();
+        switch(selected) {
 
-        switch(selected){
             case 1:
                 System.out.println("Listing product");
                 break;
@@ -34,13 +40,13 @@ public class MenuConsole {
                 System.out.println("Updating a product");
                 break;
             case 5:
-                System.out.println("Deleting a product");
+                System.out.println("Please enter the id of the product you want to delete");
+                int id = in.nextInt();
+               foodProduct.deleteProduct(id);
                 break;
-            case 6:
+            default:
                 System.out.println("Exit");
-                break;
-
-
         }
+        }   while (selected != 6);
     }
 }
