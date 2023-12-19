@@ -18,7 +18,7 @@ public class MenuConsole {
         System.out.println("[5] Delete a product by ID");
         System.out.println("[6] Exit");
 
-        int selected = in.readInt();
+        int selected = in.nextInt();
 
         switch(selected){
             case 1:
@@ -35,10 +35,10 @@ public class MenuConsole {
                 break;
             case 5:
                 System.out.println("Deleting a product");
+                break;
             case 6:
                 System.out.println("Exit");
-
-
+                break;
 
 
         }
