@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -9,7 +10,7 @@ public class MenuConsole {
      * @method: deleteProduct
      */
     FoodProductDAO foodProduct = new FoodProductDAO();
-    void displayMenu(){
+    void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
         int selected;
         do{
@@ -31,10 +32,9 @@ public class MenuConsole {
                 foodProduct.listProduct();
                 break;
             case 2:
-//                System.out.println("Please enter the id of the product you want to select");
-//                int id = in.nextInt();
-//                foodProduct.selectProduct(id);
-                System.out.println("Finding a product by id");
+                System.out.println("Please enter the id of the product you want to select");
+                int id = in.nextInt();
+                foodProduct.selectProduct(id);
                 break;
             case 3:
 //                System.out.println("Please enter the id of the product you want to add");

@@ -27,7 +27,9 @@ public class FoodProduct {
     }
     public String toHTMLString() {
         return "<tr><td>" + id + "</td><td>" + SKU + "</td><td>" + description + "</td><td>" + category + "</td><td>" + price
-                + "</td></tr>";
+                + "</td>" +
+                "<td><a href=\"/product?id="+id+"\" >View</a></td>" +
+                "</tr>";
     }
 
     @Override
@@ -35,4 +37,22 @@ public class FoodProduct {
         return "Product [ID=" + this.id + ", SKU=" + this.SKU + ", Description=" + this.description + ", Category=" + this.category
                 + ", Price=" + this.price + " ]";
     }
+
+    public String toHTMLString1() {
+        return "<h1> Hello there</h1>"+
+                "<tr><td>" + id + "</td><td>" + SKU + "</td><td>" + description + "</td><td>" + category + "</td><td>" + price
+                + "</td>" +
+
+//                "<td><a href=\"/product?id="+id+"\" >View</a></td>" +
+                "</tr>";
+    }
+
+    public String toHTMLStringProduct(){
+        return
+                "<h5 class=\"card-title\">" + SKU +"</h5>" + "<p class=\"card-text\">"+ description+ "</p>"+
+                "<a href=\"/\" class=\"btn btn-primary\"> Home </a>";
+
+
+    }
+
 }

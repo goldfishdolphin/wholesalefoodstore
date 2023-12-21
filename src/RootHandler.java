@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.util.List;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Optional;
 
 public class RootHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
@@ -13,8 +14,9 @@ public class RootHandler implements HttpHandler {
                 new OutputStreamWriter(he.getResponseBody()));
 
     FoodProductDAO foodProducts = new FoodProductDAO();
-
+//
         List<FoodProduct> allProducts = foodProducts.listProduct();
+
 
         out.write(
                 "<html>" +
@@ -37,13 +39,15 @@ public class RootHandler implements HttpHandler {
                         "<tbody>");
 
         for (FoodProduct p : allProducts) {
+            System.out.println("What is in p : " +p.toHTMLString());
             out.write(p.toHTMLString());
         }
         out.write(
                 "</tbody>" +
                         "</table>" +
                         "</body>" +
-                        "</html>");
+                        "</html>"
+                        );
 
         out.close();
 
