@@ -1,20 +1,10 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
-
-import java.util.List;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.Optional;
 
 public class ProductHandler implements HttpHandler {
         public void handle(HttpExchange he) throws IOException {
@@ -22,13 +12,10 @@ public class ProductHandler implements HttpHandler {
             BufferedWriter out = new BufferedWriter(
                     new OutputStreamWriter(he.getResponseBody()));
 
-
             String request = he.getRequestURI().getQuery();
             HashMap<String, String> map = Util.requestStringToMap(request);
             String response = "failed";
             int id = Integer.parseInt(map.get("id"));
-            System.out.println("id number is " + id);
-
             FoodProductDAO foodProducts = new FoodProductDAO();
             FoodProduct product = null;
             try {
@@ -63,7 +50,7 @@ public class ProductHandler implements HttpHandler {
                     "        alt=\"fruit\""+
                     "      />"+
                     "      <div class=\"card-body\">");
-            out.write(product.toHTMLStringProduct());
+            out.write(product.toProductHTMLString());
 
             out.write(
                     "      </div>"+

@@ -19,6 +19,7 @@ class Main {
             HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
             server.createContext("/", new RootHandler());
             server.createContext("/product", new ProductHandler());
+            server.createContext("/delete", new DeleteHandler());
 
             server.setExecutor(null);
             server.start();

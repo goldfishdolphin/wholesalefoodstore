@@ -39,7 +39,6 @@ public class RootHandler implements HttpHandler {
                         "<tbody>");
 
         for (FoodProduct p : allProducts) {
-            System.out.println("What is in p : " +p.toHTMLString());
             out.write(p.toHTMLString());
         }
         out.write(

@@ -121,5 +121,38 @@ public class FoodProductDAO {
         System.out.println(product);
             return product;
         }
+
+        public boolean deleteProduct (int product_id){
+            System.out.println("Deleting the product");
+            Connection dbConnection = null;
+            PreparedStatement statement = null;
+            int result=0;
+            String query = "DELETE FROM foodproduct WHERE ID =?;";
+            try{
+                dbConnection = connect();
+                statement= dbConnection.prepareStatement(query);
+                statement.setInt(1, product_id);
+                result = statement.executeUpdate();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }finally {
+                if(statement != null){
+                    try {
+                        statement.close();
+                    }catch (SQLException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if (dbConnection != null) {
+                try {
+                    dbConnection.close();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return result == 1;
+        }
     }
 

@@ -26,6 +26,7 @@ public class MenuConsole {
         System.out.println("[6] Exit");
 
         selected= in.nextInt();
+        int id =0;
         switch(selected) {
 
             case 1:
@@ -33,7 +34,7 @@ public class MenuConsole {
                 break;
             case 2:
                 System.out.println("Please enter the id of the product you want to select");
-                int id = in.nextInt();
+                 id = in.nextInt();
                 foodProduct.selectProduct(id);
                 break;
             case 3:
@@ -49,10 +50,14 @@ public class MenuConsole {
                 System.out.println("Updating the product");
                 break;
             case 5:
-//                System.out.println("Please enter the id of the product you want to delete");
-//                int id3 = in.nextInt();
-//               foodProduct.deleteProduct(id3);
-                System.out.println("Deleting the product");
+                System.out.println("Please enter the id of the product you want to delete");
+                id = in.nextInt();
+                if (foodProduct.selectProduct(id) == null){
+                    System.out.println("No product found with the id number "+id );
+                    break;
+                }else{
+                    foodProduct.deleteProduct(id);
+                }
                 break;
             default:
                 System.out.println("Exit");
