@@ -20,6 +20,11 @@ class Main {
             server.createContext("/", new RootHandler());
             server.createContext("/product", new ProductHandler());
             server.createContext("/delete", new DeleteHandler());
+            server.createContext("/edit", new EditHandler());
+            server.createContext("/add", new InputProductHandler());
+            server.createContext("/formaction", new FormProcessHandler());
+
+
 
             server.setExecutor(null);
             server.start();

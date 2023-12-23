@@ -1,67 +1,134 @@
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
- * This class creates a menu console to select the options
+ * This class creates a console to select the  menu options
  */
 public class MenuConsole {
     /**
-     * Food Product class
-     * @method: deleteProduct
+     *
      */
     FoodProductDAO foodProduct = new FoodProductDAO();
+
+    int id ;
+    String SKU;
+    String description;
+    String category;
+    Long price;
+
     void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
         int selected;
-        do{
-        System.out.println("_____________________");
-        System.out.println("The Food Store");
-        System.out.println("Choose from these options");
-        System.out.println("_____________________");
-        System.out.println("[1] List all products");
-        System.out.println("[2] Search by the product ID");
-        System.out.println("[3] Add a new product");
-        System.out.println("[4] Update a product by ID");
-        System.out.println("[5] Delete a product by ID");
-        System.out.println("[6] Exit");
+        do {
+            System.out.println("_____________________");
+            System.out.println("The Food Store");
+            System.out.println("Choose from these options");
+            System.out.println("_____________________");
+            System.out.println("[1] List all products");
+            System.out.println("[2] Search by the product ID");
+            System.out.println("[3] Add a new product");
+            System.out.println("[4] Update a product by ID");
+            System.out.println("[5] Delete a product by ID");
+            System.out.println("[6] Exit");
 
-        selected= in.nextInt();
-        int id =0;
-        switch(selected) {
+            selected = in.nextInt();
 
-            case 1:
-                foodProduct.listProduct();
-                break;
-            case 2:
-                System.out.println("Please enter the id of the product you want to select");
-                 id = in.nextInt();
-                foodProduct.selectProduct(id);
-                break;
-            case 3:
-//                System.out.println("Please enter the id of the product you want to add");
-//                int id1 = in.nextInt();
-//                foodProduct.addProduct(id1);
-                System.out.println("Adding a product");
-                break;
-            case 4:
-//                System.out.println("Please enter the id of the product you want to update");
-//                int id2 = in.nextInt();
-//                foodProduct.updateProduct(id2);
-                System.out.println("Updating the product");
-                break;
-            case 5:
-                System.out.println("Please enter the id of the product you want to delete");
-                id = in.nextInt();
-                if (foodProduct.selectProduct(id) == null){
-                    System.out.println("No product found with the id number "+id );
+            switch (selected) {
+
+                case 1:
+                    foodProduct.listProduct();
                     break;
-                }else{
-                    foodProduct.deleteProduct(id);
-                }
-                break;
-            default:
-                System.out.println("Exit");
+                case 2:
+                    System.out.println("Please enter the id of the product you want to select");
+                    id = in.nextInt();
+                    foodProduct.selectProduct(id);
+                    break;
+                case 3:
+                    System.out.println("Please enter the id of the product you want to add");
+                    id = in.nextInt();
+                    System.out.println("Please enter the SKU of the product you want to add");
+                    SKU = in.next();
+                    in.nextLine();
+                    System.out.println("Please enter the Description of the product you want to add2");
+                    description = in.nextLine();
+
+                    System.out.println("Please enter the category of the product you want to add");
+                    category = in.nextLine();
+                    System.out.println("Please enter the Price of the product you want to add");
+                    price = in.nextLong();
+
+                    foodProduct.upsert(new FoodProduct(id, SKU, description, category, price));
+                    System.out.println("Product Added!");
+                    break;
+                case 4:
+                    System.out.println("Please enter the id of the product you want to update");
+                    id = in.nextInt();
+                    in.nextLine();
+                    if (foodProduct.selectProduct(id) != null) {
+                        FoodProduct currentProduct = (foodProduct.selectProduct(id));
+                        String productString = String.valueOf(currentProduct);
+                        Map<String, String> productMap=Util.productKeyValuePairs(productString);
+                        SKU = productMap.get("SKU");
+                        description= productMap.get("Description");
+                        category= productMap.get("Category");
+                        price = Long.parseLong(productMap.get("Price"));
+                        System.out.println("Do you want to edit SKU? y/n");
+                        String option = in.next();
+                        in.nextLine();
+                        if (option.equals("y")) {
+                            System.out.println("Enter new SKU: ");
+                            SKU = in.next();
+                            in.nextLine();
+                            System.out.println(SKU);
+                        }
+                        System.out.println("Do you want to edit Description? y/n");
+                        option = in.next();
+                        in.nextLine();
+                        if (option.equals("y")) {
+                            System.out.println("Enter new Description: ");
+                            description = in.nextLine();
+                            System.out.println(description);
+                        }
+                        System.out.println("Do you want to edit the category y/n");
+                        option = in.next();
+                        in.nextLine();
+                        if (option.equals("y")) {
+                            System.out.println("Enter new Category: ");
+                            category = in.next();
+                            in.nextLine();
+                            System.out.println(category);
+                        }
+                        System.out.println("Do you want to edit the price y/n");
+                        option = in.next();
+                        in.nextLine();
+                        if (option.equals("y")) {
+                            System.out.println("Enter new Price: ");
+                            in.nextLine();
+                            price = in.nextLong();
+                            System.out.println(price);
+                        }
+                        foodProduct.upsert(new FoodProduct(id, SKU, description, category, price));
+                    }
+
+
+                    System.out.println("Updating the product");
+                    break;
+                case 5:
+                    System.out.println("Please enter the id of the product you want to delete");
+                    id = in.nextInt();
+                    if (foodProduct.selectProduct(id) == null) {
+                        System.out.println("Make sure the item with id " + id + " before you try to delete it");
+                        break;
+                    } else {
+                        foodProduct.deleteProduct(id);
+                    }
+                    break;
+                default:
+                    System.out.println("Exit");
+            }
         }
-        }   while (selected != 6);
+        while (selected != 6);
     }
 }

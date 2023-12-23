@@ -2,6 +2,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Util {
     public static HashMap<String, String> requestStringToMap(String request){
@@ -19,5 +20,21 @@ public class Util {
         });
         return map;
     }
+
+    public static Map<String, String> productKeyValuePairs(String productString) {
+         productString = productString.substring(productString.indexOf('[') + 1, productString.indexOf(']')).trim();
+        String[] pairs = productString.split(",\\s*");
+        Map<String, String> productMap = new HashMap<>();
+
+        for (String pair : pairs) {
+            String[] keyValue = pair.split("=");
+            if (keyValue.length == 2) {
+                productMap.put(keyValue[0], keyValue[1]);
+            }
+        }
+
+        return productMap;
+    }
+
 }
 

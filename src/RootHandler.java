@@ -26,6 +26,7 @@ public class RootHandler implements HttpHandler {
                         "</head>" +
                         "<body>" +
                         "<h1> All Products !</h1>" +
+                       "<a href=\"/add\" class=\"btn btn-primary\"> Add product </a>"+
                         "<table class=\"table\">" +
                         "<thead>" +
                         "  <tr>" +

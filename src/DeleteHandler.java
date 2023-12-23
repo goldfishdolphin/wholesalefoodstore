@@ -12,17 +12,15 @@ public class DeleteHandler implements HttpHandler {
         FoodProductDAO foodProducts = new FoodProductDAO();
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
-        String response = "failed";
         int id = Integer.parseInt(map.get("id"));
         foodProducts.deleteProduct(id);
         try {
             Optional<FoodProduct> optionalFoodProduct = Optional.ofNullable(foodProducts.selectProduct(id));
+            System.out.println(optionalFoodProduct);
             if (optionalFoodProduct.isEmpty())
                 System.out.println("Not found");
-//                response = "Product not found";
             else{
                 foodProducts.deleteProduct(id);
-                response = "Product deleted";
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());

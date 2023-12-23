@@ -35,8 +35,9 @@ public class FoodProduct {
                 "<td>" + description + "</td>" +
                 "<td>" + category + "</td>" +
                 "<td>" + price + "</td>" +
-                "<td><a href=\"/product?id="+id+"\" >View</a></td>" +
+                "<td><a href=\"/product?id="+id+"\" class=\"btn btn-primary\"> View </a></td>"+
                 "<td><a href=\"/delete?id="+id+"\" class=\"btn btn-primary\"> Delete </a></td>" +
+                "<td><a href=\"/edit?id="+id+"\" class=\"btn btn-primary\"> Edit </a></td>" +
                 "</tr>";
     }
 

@@ -118,7 +118,11 @@ public class FoodProductDAO {
                     }
                 }
             }
-        System.out.println(product);
+        if (product==null)
+            System.out.println("The product does not exist with the id "+ product_id);
+        else {
+            System.out.println(product);
+        }
             return product;
         }
 
@@ -154,5 +158,43 @@ public class FoodProductDAO {
             }
             return result == 1;
         }
+
+
+    public boolean upsert(FoodProduct product) {
+        PreparedStatement statement = null;
+        Connection connection = null;
+
+        boolean ok = false;
+        try {
+            connection = connect();
+
+            String query = "INSERT OR REPLACE INTO foodproduct VALUES(?, ?, ?, ?, ?);";
+            statement = connection.prepareStatement(query);
+            product.assignParameters(statement);
+
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            ok = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+
+            if (statement != null)
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        return ok;
+
+    }
     }
 
