@@ -8,7 +8,7 @@ public class FoodProductDAO {
      * This function create a connection java class and the database
      *
      * @return the connectivity with sqlite
-     * @throws SQLException
+     * @throws SQLException if there is an issue with the database.
      */
     private Connection connect() throws SQLException {
 
@@ -90,62 +90,22 @@ public class FoodProductDAO {
                 String description = result.getString("Description");
                 String category = result.getString("Category");
                 long price = result.getLong("Price");
-
                 product = new FoodProduct(id, SKU, description, category, price);
             }
-            } finally{
-                if (result != null) {
-                    try {
-                        result.close();
-                    }catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (statement != null) {
-                    try {
-                        statement.close();
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (dbConnection != null) {
-                    try {
-                        dbConnection.close();
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
-        if (product==null)
-            System.out.println("The product does not exist with the id "+ product_id);
-        else {
-            System.out.println(product);
-        }
-            return product;
-        }
+            if (statement != null) {
+                try {
+                    statement.close();
 
-        public boolean deleteProduct (int product_id){
-            System.out.println("Deleting the product");
-            Connection dbConnection = null;
-            PreparedStatement statement = null;
-            int result=0;
-            String query = "DELETE FROM foodproduct WHERE ID =?;";
-            try{
-                dbConnection = connect();
-                statement= dbConnection.prepareStatement(query);
-                statement.setInt(1, product_id);
-                result = statement.executeUpdate();
-            } catch (SQLException e){
-                e.printStackTrace();
-            }finally {
-                if(statement != null){
-                    try {
-                        statement.close();
-                    }catch (SQLException e){
-                        e.printStackTrace();
-                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if (dbConnection != null) {
@@ -156,11 +116,47 @@ public class FoodProductDAO {
                     e.printStackTrace();
                 }
             }
-            return result == 1;
         }
+        if (product == null)
+            System.out.println("The product does not exist with the id " + product_id);
+        return product;
+    }
+
+    public void deleteProduct(int product_id) {
+        System.out.println("Deleting the product");
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+        int result;
+        String query = "DELETE FROM foodproduct WHERE ID =?;";
+        try {
+            dbConnection = connect();
+            statement = dbConnection.prepareStatement(query);
+            statement.setInt(1, product_id);
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (dbConnection != null) {
+            try {
+                dbConnection.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("The product with id " + product_id + " has been deleted!");
+    }
 
 
-    public boolean upsert(FoodProduct product) {
+    public void upsert(FoodProduct product) {
         PreparedStatement statement = null;
         Connection connection = null;
 
@@ -193,8 +189,7 @@ public class FoodProductDAO {
                     e.printStackTrace();
                 }
         }
-        return ok;
 
     }
-    }
+}
 

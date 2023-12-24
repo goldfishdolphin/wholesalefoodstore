@@ -15,7 +15,7 @@ public class ProductHandler implements HttpHandler {
 
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
-//            String response = "failed";
+
         int id = Integer.parseInt(map.get("id"));
         FoodProductDAO foodProducts = new FoodProductDAO();
         FoodProduct product = null;

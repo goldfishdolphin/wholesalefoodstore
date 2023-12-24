@@ -1,11 +1,10 @@
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
-import java.util.List;
+import com.sun.net.httpserver.HttpHandler;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.Optional;
+import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class RootHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
@@ -13,10 +12,8 @@ public class RootHandler implements HttpHandler {
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
 
-    FoodProductDAO foodProducts = new FoodProductDAO();
-//
+        FoodProductDAO foodProducts = new FoodProductDAO();
         List<FoodProduct> allProducts = foodProducts.listProduct();
-
 
         out.write(
                 "<html>" +
@@ -24,9 +21,9 @@ public class RootHandler implements HttpHandler {
                         "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css\" integrity=\"sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2\" crossorigin=\"anonymous\">"
                         +
                         "</head>" +
-                        "<body>" +
+                        "<body style={background-color:grey;}>" +
                         "<h1> All Products !</h1>" +
-                       "<a href=\"/add\" class=\"btn btn-primary\"> Add product </a>"+
+
                         "<table class=\"table\">" +
                         "<thead>" +
                         "  <tr>" +
@@ -45,9 +42,10 @@ public class RootHandler implements HttpHandler {
         out.write(
                 "</tbody>" +
                         "</table>" +
+                        "<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
                         "</body>" +
                         "</html>"
-                        );
+        );
 
         out.close();
 

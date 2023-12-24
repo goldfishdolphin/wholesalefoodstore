@@ -22,7 +22,6 @@ public class FoodProduct {
         statement.setString(3, description);
         statement.setString(4, category);
         statement.setLong(5, price);
-
     }
 
     /**

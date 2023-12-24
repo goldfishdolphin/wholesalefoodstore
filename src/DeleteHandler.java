@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class DeleteHandler implements HttpHandler {
-    public void handle(HttpExchange he) throws IOException{
+    public void handle(HttpExchange he) throws IOException {
 
         FoodProductDAO foodProducts = new FoodProductDAO();
         String request = he.getRequestURI().getQuery();
@@ -19,10 +19,10 @@ public class DeleteHandler implements HttpHandler {
             System.out.println(optionalFoodProduct);
             if (optionalFoodProduct.isEmpty())
                 System.out.println("Not found");
-            else{
+            else {
                 foodProducts.deleteProduct(id);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }

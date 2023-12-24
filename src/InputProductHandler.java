@@ -1,5 +1,3 @@
-
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -49,15 +47,14 @@ import java.io.IOException;
                             "<div>"+
                             "        <select name=\"category\" class=\"form-select\" aria-label=\"Default category menu\">"+
                             "          <option selected>Choose Category</option>"+
-                            "          <option value=\"fruit\">Fruit</option>"+
-                            "          <option value=\"vegetable\">Vegetable</option>"+
-                            "          <option value=\"rice\">Rice</option>"+
-                            "          <option value=\"cold drink\">Cold Drinks</option>"+
-                            "          <option value=\"frozen food\">Frozen Food</option>"+
-                            "          <option value=\"snack\">Snack</option>"+
+                            "          <option value=\"Fruit\">Fruit</option>"+
+                            "          <option value=\"Vegetable\">Vegetable</option>"+
+                            "          <option value=\"Rice\">Rice</option>"+
+                            "          <option value=\"Cold Drink\">Cold Drinks</option>"+
+                            "          <option value=\"Frozen Food\">Frozen Food</option>"+
+                            "          <option value=\"Snack\">Snack</option>"+
                             "        </select>"+
                             "      </div>"+
-
                             "<div class=\"mb-3 mt-3\">"+
                             "        <label for=\"price\" class=\"form-label\">Price:</label>"+
                             "        <input name=\"price\" type=\"number\" class=\"form-control\" id=\"price\" />"+
@@ -66,26 +63,6 @@ import java.io.IOException;
                             "    </form>"+
                             "  </body>"+
                             "</html>"
-
-
-
-
-
-
-//                    "<html>" +
-//                            "<head> <title>My new Web Page</title> </head>" +
-//                            "<body>" +
-//                            "<form method=\"Post\" action=\"/formaction\">" +
-//                            "<label>Number 1</label>" +
-//                            "<input name=\"num1\"> <br \\> " +
-//                            "<label>Number 2</label>" +
-//                            "<input name=\"num2\">  " +
-//                            "<input type=\"submit\" value=\"Submit\">  " +
-//                            "</form>" +
-//                            "<h1> Page2!</h1>" +
-//                            "<a href=\"/\"> click here </a" +
-//                            "</body>" +
-//                            "</html>");
             );
             out.close();
 
