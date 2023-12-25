@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * This class creates a console to select the  menu options
+ * This class creates a console to select the  menu options to view products list, search, delete, add and update a product.
  */
 public class MenuConsole {
     FoodProductDAO foodProducts = new FoodProductDAO();

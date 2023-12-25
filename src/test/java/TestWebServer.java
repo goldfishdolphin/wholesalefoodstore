@@ -5,7 +5,9 @@ import com.sun.net.httpserver.HttpServer;
 import main.*;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * This class tests different paths at http server  using JUnit and mockito.
+ */
 public class TestWebServer {
     @Test
     public void httpServer(){
