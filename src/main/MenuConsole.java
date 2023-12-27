@@ -50,7 +50,7 @@ public class MenuConsole {
                     System.out.println("Please enter the SKU of the product you want to add");
                     SKU = in.next();
                     in.nextLine();
-                    System.out.println("Please enter the Description of the product you want to add2");
+                    System.out.println("Please enter the Description of the product you want to add");
                     description = in.nextLine();
 
                     System.out.println("Please enter the category of the product you want to add");

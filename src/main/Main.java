@@ -1,6 +1,7 @@
 package main;
 
 import com.sun.net.httpserver.HttpServer;
+import main.Customer.CustomerMenuConsole;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,6 +33,9 @@ public class Main {
 
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
+
+        CustomerMenuConsole customerMenuConsole= new CustomerMenuConsole();
+        customerMenuConsole.displayMenu();
     }
 
     public void startServer(HttpServer server, RootHandler rh, ProductHandler ph, DeleteHandler dh,
