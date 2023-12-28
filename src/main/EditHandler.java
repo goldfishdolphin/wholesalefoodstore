@@ -1,12 +1,13 @@
 package main;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
+        import com.sun.net.httpserver.HttpHandler;
+        import main.Util;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
+        import java.io.BufferedWriter;
+        import java.io.IOException;
+        import java.io.OutputStreamWriter;
+        import java.util.HashMap;
 
 public class EditHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
@@ -36,7 +37,7 @@ public class EditHandler implements HttpHandler {
                         "    <h1 class=\"text-center\">The Food Store</h1>" +
                         "    <h3 class=\"text-center\">Insert Product Details</h3>" +
                         "    <p class=\"text-left\">Enter the new values for the fields you want to update:</p>" +
-                        "<form method=\"Post\" action=\"/editformaction?id=" + id + "\">" +
+                        "<form method=\"Post\" action=\"/editcust_formaction?id=" + id + "\">" +
                         "<div class=\"mb-3\">" +
                         "      <div class=\"mb-3\">" +
                         "        <label for=\"SKU\" class=\"form-label\">New SKU:</label>" +

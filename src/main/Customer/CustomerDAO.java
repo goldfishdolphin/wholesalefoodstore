@@ -102,6 +102,7 @@ public class CustomerDAO {
                 String postCode = result.getString("post_code");
                 var address = new Address(addressLine1, addressLine2, addressLine3, country, postCode);
                 customer = new Customer(customer_id, businessName, address, phoneNumber);
+
             }
         } finally {
             if (result != null) {

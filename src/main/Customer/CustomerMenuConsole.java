@@ -144,7 +144,6 @@ public class CustomerMenuConsole {
                             phoneNumber = in.nextLine();
                         }
                         address = new Address(addressLine1, addressLine2, addressLine3, country, postCode);
-
                         customers.upsert(new Customer(customer_id, businessName, address, phoneNumber));
                     }
 
