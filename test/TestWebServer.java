@@ -1,8 +1,10 @@
-package test.java;
-
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.*;
+import main.Product.*;
+import main.User.LoginFormHandler;
+import main.User.LoginHandler;
+import main.User.LogoutHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
@@ -20,7 +22,7 @@ public class TestWebServer {
         DeleteHandler dh = new DeleteHandler();
         EditHandler eh = new EditHandler();
         InputProductHandler ih = new InputProductHandler();
-        FormProcessHandler fh = new FormProcessHandler();
+        FormProcessHandler fph = new FormProcessHandler();
         EditFormHandler efh = new EditFormHandler();
         CustomersHandler ch = new CustomersHandler();
         EachCustomerHandler ech = new EachCustomerHandler();
@@ -28,16 +30,21 @@ public class TestWebServer {
         EditCustomerHandler ecuh = new EditCustomerHandler();
         CustEditFormHandler cefh = new CustEditFormHandler();
         AddCustomerHandler ach = new AddCustomerHandler();
+        LoginHandler lh = new LoginHandler();
         CustomerFormProcessHandler cfph = new CustomerFormProcessHandler();
+        LoginFormHandler lfh = new LoginFormHandler();
+        LogoutHandler loh = new LogoutHandler();
+        SearchHandler sh = new SearchHandler();
+        FilterHandler fh = new FilterHandler();
         Main main = new Main();
-        main.startServer(httpServer, rh, ph, dh, eh, ih, fh, efh, ch, ech, dch, ecuh, cefh, ach, cfph);
+        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh);
 
         verify(httpServer).createContext("/", rh);
         verify(httpServer).createContext("/product", ph);
         verify(httpServer).createContext("/delete", dh);
         verify(httpServer).createContext("/edit", eh);
         verify(httpServer).createContext("/add", ih);
-        verify(httpServer).createContext("/formaction", fh);
+        verify(httpServer).createContext("/formaction", fph);
         verify(httpServer).createContext("/editformaction", efh);
         verify(httpServer).createContext("/customers", ch);
         verify(httpServer).createContext("/customer", ech);
@@ -45,5 +52,11 @@ public class TestWebServer {
         verify(httpServer).createContext("/editcustomer", ecuh);
         verify(httpServer).createContext("/addcustomer", ach);
         verify(httpServer).createContext("/customerformaction", cfph);
+        verify(httpServer).createContext("/login", lh);
+        verify(httpServer).createContext("/loginformaction", lfh);
+        verify(httpServer).createContext("/logout", loh);
+        verify(httpServer).createContext("/search", sh);
+        verify(httpServer).createContext("/filter", fh);
+
     }
 }

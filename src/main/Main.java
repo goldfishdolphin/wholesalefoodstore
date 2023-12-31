@@ -2,8 +2,14 @@ package main;
 
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
+import main.Product.*;
+import main.User.LoginFormHandler;
+import main.User.LoginHandler;
+import main.User.LogoutHandler;
+import main.User.SessionManager;
 
 import java.io.IOException;
+import java.lang.invoke.SwitchPoint;
 import java.net.InetSocketAddress;
 import java.sql.SQLException;
 
@@ -16,7 +22,7 @@ import java.sql.SQLException;
 
 
 public class Main {
-    private static final int PORT = 8084;
+    private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException, SQLException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -25,30 +31,39 @@ public class Main {
         DeleteHandler dh = new DeleteHandler();
         EditHandler eh = new EditHandler();
         InputProductHandler ih = new InputProductHandler();
-        FormProcessHandler fh = new FormProcessHandler();
+        FormProcessHandler fph = new FormProcessHandler();
         EditFormHandler efh = new EditFormHandler();
         CustomersHandler ch = new CustomersHandler();
         EachCustomerHandler ech = new EachCustomerHandler();
         DeleteCustomerHandler dch = new DeleteCustomerHandler();
-        EditCustomerHandler ecuh= new EditCustomerHandler();
+        EditCustomerHandler ecuh = new EditCustomerHandler();
         CustEditFormHandler cefh = new CustEditFormHandler();
         AddCustomerHandler ach = new AddCustomerHandler();
         CustomerFormProcessHandler cfph = new CustomerFormProcessHandler();
+        LoginHandler lh = new LoginHandler();
+        LoginFormHandler lfh = new LoginFormHandler();
+        LogoutHandler loh = new LogoutHandler();
+        SearchHandler sh = new SearchHandler();
+        FilterHandler fh = new FilterHandler();
 
         Main main = new Main();
-        main.startServer(server, rh, ph, dh, eh, ih, fh, efh, ch, ech, dch,ecuh, cefh, ach, cfph);
+        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh);
 
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
 
-        CustomerMenuConsole customerMenuConsole= new CustomerMenuConsole();
+        SessionManager sessionManager= new SessionManager();
+        System.out.println(sessionManager);
+
+        CustomerMenuConsole customerMenuConsole = new CustomerMenuConsole();
         customerMenuConsole.displayMenu();
     }
 
     public void startServer(HttpServer server, RootHandler rh, ProductHandler ph, DeleteHandler dh,
-                             EditHandler eh, InputProductHandler ih, FormProcessHandler fh, EditFormHandler efh,
+                            EditHandler eh, InputProductHandler ih, FormProcessHandler fph, EditFormHandler efh,
                             CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch, EditCustomerHandler ecuh,
-                            CustEditFormHandler cefh, AddCustomerHandler ach,CustomerFormProcessHandler cfph) {
+                            CustEditFormHandler cefh, AddCustomerHandler ach, CustomerFormProcessHandler cfph, LoginHandler lh,
+                            LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh) {
 
         server.createContext("/", rh);
         server.createContext("/customers", ch);
@@ -56,15 +71,19 @@ public class Main {
         server.createContext("/delete", dh);
         server.createContext("/edit", eh);
         server.createContext("/add", ih);
-        server.createContext("/formaction", fh);
+        server.createContext("/formaction", fph);
         server.createContext("/editformaction", efh);
         server.createContext("/customer", ech);
         server.createContext("/deletecustomer", dch);
         server.createContext("/editcustomer", ecuh);
         server.createContext("/custeditformaction", cefh);
         server.createContext("/addcustomer", ach);
-        server.createContext("/customerformaction",cfph);
-
+        server.createContext("/customerformaction", cfph);
+        server.createContext("/login", lh);
+        server.createContext("/loginformaction", lfh);
+        server.createContext("/logout",loh);
+        server.createContext("/search",sh);
+        server.createContext("/filter",fh);
 
         server.setExecutor(null);
         server.start();
