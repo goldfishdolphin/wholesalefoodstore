@@ -1,4 +1,4 @@
-package main;
+package main.Customer;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
-public class RootHandler implements HttpHandler {
+public class CustomersHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
 
-        FoodProductDAO foodProducts = new FoodProductDAO();
-        List<FoodProduct> allProducts = foodProducts.listProduct();
+        CustomerDAO customers = new CustomerDAO();
+        List<Customer> allCustomers = customers.listCustomer();
 
         out.write(
                 "<html>" +
@@ -24,29 +24,26 @@ public class RootHandler implements HttpHandler {
                         +
                         "</head>" +
                         "<body style={background-color:grey;}>" +
-                        "<h1> All Products !</h1>" +
+                        "<h1> All Customers !</h1>" +
 
                         "<table class=\"table\">" +
                         "<thead>" +
                         "  <tr>" +
-                        "    <th>ID</th>" +
-                        "    <th>SKU</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Category</th>" +
-                        "    <th>Price</th>" +
+                        "    <th>Customer ID</th>" +
+                        "    <th>Business Name</th>" +
+                        "    <th>Phone Number</th>" +
+                        "    <th>Address</th>" +
                         "  </tr>" +
                         "</thead>" +
                         "<tbody>");
 
-        for (FoodProduct p : allProducts) {
-            out.write(p.toHTMLString());
+        for (Customer c : allCustomers) {
+            out.write(c.toHTMLString());
         }
         out.write(
                 "</tbody>" +
                         "</table>" +
-                        "<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
-
-                        "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>" +
+                        "<a href=\"/addcustomer\" class=\"btn btn-dark\"> Add New Customer </a>" +
                         "</body>" +
                         "</html>"
         );
