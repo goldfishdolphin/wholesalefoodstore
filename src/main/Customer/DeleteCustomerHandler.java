@@ -2,8 +2,7 @@ package main.Customer;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import main.FoodProduct;
-import main.FoodProductDAO;
+import main.Product.FoodProductDAO;
 import main.Util;
 
 import java.io.IOException;

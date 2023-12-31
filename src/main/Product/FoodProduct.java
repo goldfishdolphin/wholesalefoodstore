@@ -1,4 +1,4 @@
-package main;
+package main.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ public class FoodProduct {
     }
 
     /**
-     * This method convert Html code for each product to a string format.
+     * This method convert Html code for each product to a string format for an admin user.
      * @return HTML code in a string form to display product details, view and delete options.
      */
     public String toHTMLString() {
@@ -41,7 +41,15 @@ public class FoodProduct {
                 "<td><a href=\"/edit?id="+id+"\" class=\"btn btn-primary\"> Edit </a></td>" +
                 "</tr>";
     }
-
+    public String toCustomerHTMLString() {
+        return "<tr><td>" + id + "</td>" +
+                "<td>" + SKU + "</td>" +
+                "<td>" + description + "</td>" +
+                "<td>" + category + "</td>" +
+                "<td>" + price + "</td>" +
+                "<td><a href=\"/product?id="+id+"\" class=\"btn btn-primary\"> View </a></td>"+
+                "</tr>";
+    }
     /**
      * The method formats the output of each product in a string format.
      * @return The details of each product on menu console.

@@ -1,8 +1,13 @@
 package main;
 
+import main.Product.FoodProduct;
+import main.Product.FoodProductDAO;
+
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * This class creates a console to select the  menu options to view products list, search, delete, add and update a product.
@@ -15,6 +20,10 @@ public class MenuConsole {
     String description;
     String category;
     Long price;
+
+    private static boolean filterProduct(FoodProduct foodProduct) {
+        return foodProduct.toString().contains("box");
+    }
 
     void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
@@ -36,7 +45,7 @@ public class MenuConsole {
             switch (selected) {
 
                 case 1:
-                    foodProducts.listProduct();
+                  foodProducts.listProduct();
                     break;
                 case 2:
                     System.out.println("Please enter the id of the product you want to select");

@@ -1,4 +1,4 @@
-package main;
+package main.Product;
 
 import java.io.OutputStreamWriter;
 import com.sun.net.httpserver.HttpHandler;

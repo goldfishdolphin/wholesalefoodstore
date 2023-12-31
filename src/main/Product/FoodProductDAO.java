@@ -1,4 +1,4 @@
-package main;
+package main.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,6 +70,7 @@ public class FoodProductDAO {
         foodProducts.forEach(foodProduct -> System.out.println(foodProduct)); //lambda function to iterate the products in the list.
         return foodProducts;
     }
+//public List<>
 
     public FoodProduct selectProduct(int product_id) throws SQLException {
 

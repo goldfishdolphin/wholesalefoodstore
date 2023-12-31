@@ -1,7 +1,8 @@
-package main;
+package main.Product;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import main.Util;
 
 import java.io.IOException;
 import java.sql.SQLException;
