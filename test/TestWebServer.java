@@ -3,6 +3,9 @@ package test.java;
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.*;
+import main.Product.*;
+import main.User.LoginFormHandler;
+import main.User.LoginHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
@@ -28,9 +31,11 @@ public class TestWebServer {
         EditCustomerHandler ecuh = new EditCustomerHandler();
         CustEditFormHandler cefh = new CustEditFormHandler();
         AddCustomerHandler ach = new AddCustomerHandler();
+        LoginHandler lh = new LoginHandler();
         CustomerFormProcessHandler cfph = new CustomerFormProcessHandler();
+        LoginFormHandler lfh = new LoginFormHandler();
         Main main = new Main();
-        main.startServer(httpServer, rh, ph, dh, eh, ih, fh, efh, ch, ech, dch, ecuh, cefh, ach, cfph);
+        main.startServer(httpServer, rh, ph, dh, eh, ih, fh, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh);
 
         verify(httpServer).createContext("/", rh);
         verify(httpServer).createContext("/product", ph);
@@ -45,5 +50,7 @@ public class TestWebServer {
         verify(httpServer).createContext("/editcustomer", ecuh);
         verify(httpServer).createContext("/addcustomer", ach);
         verify(httpServer).createContext("/customerformaction", cfph);
+        verify(httpServer).createContext("/login", lh);
+        verify(httpServer).createContext("/loginformaction", lfh);
     }
 }
