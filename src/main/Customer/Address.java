@@ -1,9 +1,5 @@
 package main.Customer;
 
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
 
 public class Address {
     private String addressLine1;

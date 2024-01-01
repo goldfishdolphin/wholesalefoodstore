@@ -18,13 +18,10 @@ import static main.Util.getCurrentSessionId;
 
 public class FilterHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
-        System.out.println("hello1");
         String request = he.getRequestURI().getQuery();
-        System.out.println(request);
         HashMap<String, String> map = Util.requestStringToMap(request);
-        System.out.println(map);
         String category = map.get("Category").toLowerCase();
-        System.out.println(category);
+
         String sessionId = getCurrentSessionId(he);
         String loggedInUser = null;
         if (sessionId != null) {
@@ -42,7 +39,6 @@ public class FilterHandler implements HttpHandler {
                 filteredProducts.add(foodProduct);
             }
         }
-        System.out.println("filtered");
         filteredProducts.forEach(System.out::println);
 
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(

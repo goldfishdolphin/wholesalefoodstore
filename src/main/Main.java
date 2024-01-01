@@ -3,13 +3,14 @@ package main;
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.Product.*;
+import main.Stock.ExpiryHandler;
+import main.Stock.StockHandler;
 import main.User.LoginFormHandler;
 import main.User.LoginHandler;
 import main.User.LogoutHandler;
 import main.User.SessionManager;
 
 import java.io.IOException;
-import java.lang.invoke.SwitchPoint;
 import java.net.InetSocketAddress;
 import java.sql.SQLException;
 
@@ -22,7 +23,7 @@ import java.sql.SQLException;
 
 
 public class Main {
-    private static final int PORT = 8080;
+    private static final int PORT = 8081;
 
     public static void main(String[] args) throws IOException, SQLException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -45,14 +46,16 @@ public class Main {
         LogoutHandler loh = new LogoutHandler();
         SearchHandler sh = new SearchHandler();
         FilterHandler fh = new FilterHandler();
+        StockHandler sth = new StockHandler();
+        ExpiryHandler exh = new ExpiryHandler();
 
         Main main = new Main();
-        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh);
+        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh);
 
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
 
-        SessionManager sessionManager= new SessionManager();
+        SessionManager sessionManager = new SessionManager();
         System.out.println(sessionManager);
 
         CustomerMenuConsole customerMenuConsole = new CustomerMenuConsole();
@@ -63,7 +66,7 @@ public class Main {
                             EditHandler eh, InputProductHandler ih, FormProcessHandler fph, EditFormHandler efh,
                             CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch, EditCustomerHandler ecuh,
                             CustEditFormHandler cefh, AddCustomerHandler ach, CustomerFormProcessHandler cfph, LoginHandler lh,
-                            LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh) {
+                            LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh, StockHandler sth, ExpiryHandler exh) {
 
         server.createContext("/", rh);
         server.createContext("/customers", ch);
@@ -81,9 +84,12 @@ public class Main {
         server.createContext("/customerformaction", cfph);
         server.createContext("/login", lh);
         server.createContext("/loginformaction", lfh);
-        server.createContext("/logout",loh);
-        server.createContext("/search",sh);
-        server.createContext("/filter",fh);
+        server.createContext("/logout", loh);
+        server.createContext("/search", sh);
+        server.createContext("/filter", fh);
+        server.createContext("/stock", sth);
+        server.createContext("/stock=", exh);
+
 
         server.setExecutor(null);
         server.start();

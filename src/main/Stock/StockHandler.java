@@ -1,9 +1,7 @@
-package main;
+package main.Stock;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import main.Product.FoodProduct;
-import main.Product.FoodProductDAO;
 import main.User.SessionManager;
 
 import java.io.BufferedWriter;
@@ -14,15 +12,13 @@ import java.util.Objects;
 
 import static main.Util.getCurrentSessionId;
 
-public class RootHandler implements HttpHandler {
+public class StockHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
-
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
 
         String sessionId = getCurrentSessionId(he);
-
         String loggedInUser = null;
         if (sessionId != null) {
             loggedInUser = SessionManager.getLoggedInUser(sessionId);
@@ -30,8 +26,11 @@ public class RootHandler implements HttpHandler {
         } else {
             System.out.println("No Session ID found.");
         }
-        FoodProductDAO foodProducts = new FoodProductDAO();
-        List<FoodProduct> allProducts = foodProducts.listProduct();
+        FoodItemDOA foodItemDOA= new FoodItemDOA();
+        List<FoodItem> fooditems = foodItemDOA.foodItemList();
+
+        System.out.println("hello stock page");
+
 
         out.write(
                 "<html>" +
@@ -48,16 +47,13 @@ public class RootHandler implements HttpHandler {
                         "<h1> Food Products !</h1>" +
                         "<div class=\"dropdown\">" +
                         "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
-                        "        Choose Category" +
+                        "        Filter Stock" +
                         "      </button>" +
                         "      <ul class=\"dropdown-menu\" style=\"\">" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
-                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"stock=expired\">Expired Items</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"stock=outofstock\">Out of Stock</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"stock=restock\">Stock to Re-order</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"/stock\">All Stock</a></li>" +
                         "      </ul>" +
                         "    </div>" +
 
@@ -80,19 +76,14 @@ public class RootHandler implements HttpHandler {
                         "<thead>" +
                         "  <tr>" +
                         "    <th>ID</th>" +
-                        "    <th>SKU</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Category</th>" +
-                        "    <th>Price</th>" +
+                        "    <th>Product Details</th>" +
+                        "    <th>Quantity</th>" +
+                        "    <th>Expiry Date</th>" +
                         "  </tr>" +
                         "</thead>" +
                         "<tbody>");
-        for (FoodProduct p : allProducts) {
-            if (Objects.equals(loggedInUser, "admin")) {
-                out.write(p.toHTMLString());
-            } else {
-                out.write(p.toCustomerHTMLString());
-            }
+        for (FoodItem f : fooditems) {
+            out.write(f.toHTMLString());
         }
         out.write(
                 "</tbody>" +

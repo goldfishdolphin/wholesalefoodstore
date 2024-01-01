@@ -69,5 +69,4 @@ public class FoodProduct {
                 "<h5 class=\"card-title\">" + SKU +"</h5>" + "<p class=\"card-text\">"+ description+ "</p>"+
                 "<a href=\"/\" class=\"btn btn-primary\"> Home </a>";
     }
-
 }
