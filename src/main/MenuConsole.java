@@ -21,10 +21,6 @@ public class MenuConsole {
     String category;
     Long price;
 
-    private static boolean filterProduct(FoodProduct foodProduct) {
-        return foodProduct.toString().contains("box");
-    }
-
     void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
         int selected;

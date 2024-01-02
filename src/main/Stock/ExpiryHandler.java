@@ -1,28 +1,31 @@
-package main;
+package main.Stock;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import main.Product.FoodProduct;
-import main.Product.FoodProductDAO;
 import main.User.SessionManager;
+import main.Util;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 import static main.Util.getCurrentSessionId;
 
-public class RootHandler implements HttpHandler {
+
+public class ExpiryHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
-
+        String request = he.getRequestURI().getQuery();
+        HashMap<String, String> map = Util.requestStringToMap(request);
+        String status = map.get("stock");
+        System.out.println(status);
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
 
         String sessionId = getCurrentSessionId(he);
-
         String loggedInUser = null;
         if (sessionId != null) {
             loggedInUser = SessionManager.getLoggedInUser(sessionId);
@@ -30,12 +33,22 @@ public class RootHandler implements HttpHandler {
         } else {
             System.out.println("No Session ID found.");
         }
-        FoodProductDAO foodProducts = new FoodProductDAO();
-        List<FoodProduct> allProducts = foodProducts.listProduct();
+
+
+        FoodItemDOA foodItems = new FoodItemDOA();
+        List<FoodItem> fooditems = null;
+
+        if (status.equals("expired")) {
+            fooditems = foodItems.expiredItems();
+        } else if (status.equals("outofstock")) {
+            fooditems = foodItems.outOfStock();
+        } else if (status.equals("restock")) {
+            fooditems = foodItems.reStockItems();
+        }
+
 
         out.write(
                 "<html>" +
-
                         "<head>" +
                         "    <meta charset=\"utf-8\">" +
                         "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" +
@@ -46,22 +59,18 @@ public class RootHandler implements HttpHandler {
                         "  </head>" +
                         "<body>" +
                         "<h1> Food Products !</h1>" +
+                        "<h1> ExpiredItem</h1>" +
                         "<div class=\"dropdown\">" +
-                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
-                        "        Choose Category" +
+                        "      <button class=\"btn btn-danger dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                        "        Filter Stock" +
                         "      </button>" +
                         "      <ul class=\"dropdown-menu\" style=\"\">" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
-                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"status?stock=expired\">Expired Items</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"status?stock=outofstock\">Out of Stock</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"status?stock=restock\">Stock to Re-order</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"/stock\">All Stock</a></li>" +
                         "      </ul>" +
                         "    </div>" +
-
-
                         "<nav class=\"navbar bg-body-tertiary\">" +
                         "      <div class=\"container-fluid\">" +
                         "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
@@ -80,35 +89,27 @@ public class RootHandler implements HttpHandler {
                         "<thead>" +
                         "  <tr>" +
                         "    <th>ID</th>" +
-                        "    <th>SKU</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Category</th>" +
-                        "    <th>Price</th>" +
+                        "    <th>Product Details</th>" +
+                        "    <th>Quantity</th>" +
+                        "    <th>Expiry Date</th>" +
                         "  </tr>" +
                         "</thead>" +
                         "<tbody>");
-        for (FoodProduct p : allProducts) {
-            if (Objects.equals(loggedInUser, "admin")) {
-                out.write(p.toHTMLString());
-            } else {
-                out.write(p.toCustomerHTMLString());
-            }
+        for (FoodItem f : fooditems) {
+            out.write(f.toHTMLString());
         }
-        out.write(
-                "</tbody>" +
-                        "</table>");
+        out.write("</tbody>" +
+                "</table>");
         if (Objects.equals(loggedInUser, "admin")) {
             out.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
                     "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>");
-            out.write("<a href=\"/stock\" class=\"btn btn-dark\"> Check Stock</a>");
         }
 
         if (loggedInUser != null) {
+            out.write("<a href=\"/\" class=\"btn btn-dark\"> Home</a>");
             out.write("<a href=\"/logout\" class=\"btn btn-dark\"> Log Out</a>");
         } else {
             out.write("<a href=\"/login\" class=\"btn btn-dark\"> Log In</a>");
-
-
         }
 
         out.write("</body>" +

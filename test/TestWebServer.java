@@ -1,7 +1,11 @@
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
-import main.*;
+import main.Main;
 import main.Product.*;
+import main.RootHandler;
+import main.Stock.ExpiryHandler;
+import main.Stock.FoodItemDOA;
+import main.Stock.StockHandler;
 import main.User.LoginFormHandler;
 import main.User.LoginHandler;
 import main.User.LogoutHandler;
@@ -36,8 +40,10 @@ public class TestWebServer {
         LogoutHandler loh = new LogoutHandler();
         SearchHandler sh = new SearchHandler();
         FilterHandler fh = new FilterHandler();
+        StockHandler sth = new StockHandler();
+        ExpiryHandler exh = new ExpiryHandler();
         Main main = new Main();
-        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh);
+        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth,exh);
 
         verify(httpServer).createContext("/", rh);
         verify(httpServer).createContext("/product", ph);
@@ -57,6 +63,9 @@ public class TestWebServer {
         verify(httpServer).createContext("/logout", loh);
         verify(httpServer).createContext("/search", sh);
         verify(httpServer).createContext("/filter", fh);
+        verify(httpServer).createContext("/stock", sth);
+        verify(httpServer).createContext("/status", exh);
+
 
     }
 }
