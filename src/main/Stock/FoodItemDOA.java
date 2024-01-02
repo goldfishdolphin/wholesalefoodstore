@@ -10,6 +10,7 @@ public class FoodItemDOA {
         String dbURL = "jdbc:sqlite:foodstore.sql";
         return DriverManager.getConnection(dbURL);
     }
+
     public List<FoodItem> foodItemList() {
         System.out.println("Listing the stock level of the food items...");
         Connection dbConnection = null;
@@ -29,8 +30,8 @@ public class FoodItemDOA {
                 int id = result.getInt("product_id");
                 String product = result.getString("description");
                 int quantity = result.getInt("quantity");
-                    String expiry_date = result.getString("expiry_date");
-                System.out.println("product"+id);
+                String expiry_date = result.getString("expiry_date");
+
                 fooditems.add(new FoodItem(id, product, quantity, expiry_date));
             }
         } catch (SQLException e) {
@@ -64,8 +65,9 @@ public class FoodItemDOA {
         fooditems.forEach(foodItem -> System.out.println(foodItem)); //lambda function to iterate the products in the list.
         return fooditems;
     }
+
     public List<FoodItem> expiredItems() {
-        System.out.println("Listing the stock level of the food items...");
+        System.out.println("Listing the stock level of the expired food items...");
         Connection dbConnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -120,8 +122,9 @@ public class FoodItemDOA {
         fooditems.forEach(foodItem -> System.out.println(foodItem)); //lambda function to iterate the products in the list.
         return fooditems;
     }
+
     public List<FoodItem> outOfStock() {
-        System.out.println("Listing the stock level of the food items...");
+        System.out.println("Listing the stock level of the out of the stock food items...");
         Connection dbConnection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -175,8 +178,9 @@ public class FoodItemDOA {
         fooditems.forEach(foodItem -> System.out.println(foodItem)); //lambda function to iterate the products in the list.
         return fooditems;
     }
+
     public List<FoodItem> reStockItems() {
-        System.out.println("Listing the stock level of the food items...");
+        System.out.println("Listing the food items that needs to be re-stocked...");
         Connection dbConnection = null;
         Statement statement = null;
         ResultSet result = null;
