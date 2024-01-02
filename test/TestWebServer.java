@@ -64,7 +64,7 @@ public class TestWebServer {
         verify(httpServer).createContext("/search", sh);
         verify(httpServer).createContext("/filter", fh);
         verify(httpServer).createContext("/stock", sth);
-        verify(httpServer).createContext("/stock=", exh);
+        verify(httpServer).createContext("/status", exh);
 
 
     }
