@@ -100,13 +100,14 @@ public class RootHandler implements HttpHandler {
         if (Objects.equals(loggedInUser, "admin")) {
             out.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
                     "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>");
+            out.write("<a href=\"/stock\" class=\"btn btn-dark\"> Check Stock</a>");
         }
 
         if (loggedInUser != null) {
             out.write("<a href=\"/logout\" class=\"btn btn-dark\"> Log Out</a>");
         } else {
             out.write("<a href=\"/login\" class=\"btn btn-dark\"> Log In</a>");
-            out.write("<a href=\"/stock\" class=\"btn btn-dark\"> Check Stock</a>");
+
 
         }
 
