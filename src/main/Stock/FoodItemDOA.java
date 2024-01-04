@@ -17,8 +17,8 @@ public class FoodItemDOA {
         Statement statement = null;
         ResultSet result = null;
 
-        String query = "SELECT product_id, description, quantity, " +
-                "IFNULL(expiry_date,'N/A') expiry_date " +
+        String query = "SELECT product_id, description,price, " +
+                "IFNULL(expiry_date,'N/A') expiry_date ,quantity " +
                 "FROM foodproduct , stock " +
                 "WHERE foodproduct.id = stock.product_id;";
         List<FoodItem> fooditems = new ArrayList<>();
@@ -29,10 +29,11 @@ public class FoodItemDOA {
             while (result.next()) {
                 int id = result.getInt("product_id");
                 String product = result.getString("description");
+                int price = result.getInt("price");
                 int quantity = result.getInt("quantity");
                 String expiry_date = result.getString("expiry_date");
 
-                fooditems.add(new FoodItem(id, product, quantity, expiry_date));
+                fooditems.add(new FoodItem(id, product, quantity, expiry_date, price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +73,7 @@ public class FoodItemDOA {
         Statement statement = null;
         ResultSet result = null;
 
-        String query = "SELECT product_id, description, quantity, " +
+        String query = "SELECT product_id, description, price, quantity, " +
                 "expiry_date " +
                 "FROM foodproduct , stock " +
                 "WHERE foodproduct.id = stock.product_id " +
@@ -86,10 +87,11 @@ public class FoodItemDOA {
             while (result.next()) {
                 int id = result.getInt("product_id");
                 String product = result.getString("description");
+                int price = result.getInt("price");
                 int quantity = result.getInt("quantity");
                 String expiry_date = result.getString("expiry_date");
 
-                fooditems.add(new FoodItem(id, product, quantity, expiry_date));
+                fooditems.add(new FoodItem(id, product, quantity, expiry_date, price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,7 +131,7 @@ public class FoodItemDOA {
         Statement statement = null;
         ResultSet result = null;
 
-        String query = "SELECT product_id, description, quantity, " +
+        String query = "SELECT product_id, description, price, quantity, " +
                 "IFNULL(expiry_date,'N/A') expiry_date " +
                 "FROM foodproduct , stock " +
                 "WHERE foodproduct.id = stock.product_id AND " +
@@ -142,10 +144,11 @@ public class FoodItemDOA {
             while (result.next()) {
                 int id = result.getInt("product_id");
                 String product = result.getString("description");
+                int price = result.getInt("price");
                 int quantity = result.getInt("quantity");
                 String expiry_date = result.getString("expiry_date");
 
-                fooditems.add(new FoodItem(id, product, quantity, expiry_date));
+                fooditems.add(new FoodItem(id, product, quantity, expiry_date, price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -185,7 +188,7 @@ public class FoodItemDOA {
         Statement statement = null;
         ResultSet result = null;
 
-        String query = "SELECT product_id, description, quantity, " +
+        String query = "SELECT product_id, description, price, quantity, " +
                 "expiry_date " +
                 "FROM foodproduct , stock " +
                 "WHERE foodproduct.id = stock.product_id AND " +
@@ -199,10 +202,11 @@ public class FoodItemDOA {
             while (result.next()) {
                 int id = result.getInt("product_id");
                 String product = result.getString("description");
+                int price = result.getInt("price");
                 int quantity = result.getInt("quantity");
                 String expiry_date = result.getString("expiry_date");
 
-                fooditems.add(new FoodItem(id, product, quantity, expiry_date));
+                fooditems.add(new FoodItem(id, product, quantity, expiry_date, price));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -236,7 +240,61 @@ public class FoodItemDOA {
         return fooditems;
     }
 
+    public FoodItem selectItem(int id) throws SQLException {
+        FoodItem item = null;
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        String query = "SELECT product_id, description, price, quantity, " +
+                "IFNULL(expiry_date,'N/A')  expiry_date " +
+                "FROM foodproduct JOIN stock " +
+                "ON foodproduct.id = stock.product_id " +
+                "WHERE stock.product_id= ? ;";
+        try {
+            dbConnection = connect();
+            statement = dbConnection.prepareStatement(query);
+            statement.setInt(1, id);
+            result = statement.executeQuery();
 
+            while (result.next()) {
+                int product_id = result.getInt("product_id");
+                String product = result.getString("description");
+                int price = result.getInt("price");
+                String expiry_date = result.getString("expiry_date");
+                int quantity = result.getInt("quantity");
+                item = new FoodItem(product_id, product, quantity, expiry_date, price);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (dbConnection != null) {
+                try {
+                    dbConnection.close();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return item;
+    }
 }
+
 
 

@@ -1,9 +1,10 @@
 package main.Stock;
 
+import main.ShoppingBasket.ShoppingBasket;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 
 public class FoodItem {
@@ -12,19 +13,22 @@ public class FoodItem {
     private String expiryDate;
     private String foodProduct;
     private int quantity;
+    private int price;
 
-    public FoodItem(int id, String foodProduct, int quantity, String expiryDate) {
+    public FoodItem(int id, String foodProduct, int quantity, String expiryDate, int price) {
         this.id = id;
         this.foodProduct= foodProduct;
         this.expiryDate = expiryDate;
         this.quantity= quantity;
+        this.price = price;
     }
 
     public void assignParameters(PreparedStatement statement)throws SQLException{
         statement.setInt(1, id);
-        statement.setString(3, foodProduct);
-        statement.setDate(2, Date.valueOf(expiryDate));
-        statement.setInt(3, quantity);
+        statement.setString(2, foodProduct);
+        statement.setInt(3, price);
+        statement.setString(4, expiryDate);
+        statement.setInt(5, quantity);
 
     }
 
@@ -33,6 +37,7 @@ public class FoodItem {
                 "<td>" + id + "</td>" +
                 "<td>" + foodProduct + "</td>" +
                 "<td>" + quantity + "</td>" +
+                "<td>" +price + "</td>" +
                 "<td>" + expiryDate + "</td>" +
                 "<td><a href=\"/product?id="+id+"\" class=\"btn btn-primary\"> View </a></td>"+
                 "<td><a href=\"/delete?id="+id+"\" class=\"btn btn-primary\"> Delete </a></td>" +
@@ -41,7 +46,7 @@ public class FoodItem {
     }
     @Override
     public String toString() {
-        return  "ID="+id+ ", Product=" + this.foodProduct+ ", Quantity="+quantity+ ", Expiry Date=" + this.expiryDate ;
+        return  "ID="+id+ ", Product=" + this.foodProduct+ ", Quantity="+quantity+ ", Expiry Date=" + this.expiryDate + ", Price ="+price;
     }
 }
 

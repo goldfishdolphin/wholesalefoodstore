@@ -26,9 +26,9 @@ public class StockHandler implements HttpHandler {
         } else {
             System.out.println("No Session ID found.");
         }
-        FoodItemDOA foodItemDOA= new FoodItemDOA();
+        FoodItemDOA foodItemDOA = new FoodItemDOA();
         List<FoodItem> fooditems = foodItemDOA.foodItemList();
-
+        System.out.println(fooditems);
 
         out.write(
                 "<html>" +
@@ -42,9 +42,9 @@ public class StockHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "<body>" +
-                        "<h1> Food Products !</h1>" );
+                        "<h1> Food Products !</h1>");
         if (!Objects.equals(loggedInUser, "admin")) {
-            out.write(  "<h4> No access !</h4>" );
+            out.write("<h4> No access !</h4>");
         } else {
             out.write("<div class=\"dropdown\">" +
                     "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
@@ -79,6 +79,7 @@ public class StockHandler implements HttpHandler {
                     "    <th>ID</th>" +
                     "    <th>Product Details</th>" +
                     "    <th>Quantity</th>" +
+                    "    <th>Price</th>" +
                     "    <th>Expiry Date</th>" +
                     "  </tr>" +
                     "</thead>" +

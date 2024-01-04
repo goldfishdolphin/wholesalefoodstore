@@ -23,10 +23,10 @@ public class UserDAO {
             statement = dbConnection.createStatement();
             result = statement.executeQuery(query);
             while (result.next()) {
-                int id = result.getInt("user_id");
+//                int id = result.getInt("user_id");
                 String username = result.getString("username");
                 String password = result.getString("password");
-                users.add(new User( id, username, password));
+                users.add(new User( username, password));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,26 +59,25 @@ public class UserDAO {
         users.forEach(user -> System.out.println(user)); //lambda function to iterate the users in the list.
         return users.toString();
     }
-    public User selectUser(int user_id) throws SQLException {
+    public User selectUser(String username) throws SQLException {
 
     User user = null;
         Connection dbConnection = null;
         PreparedStatement statement = null;
         ResultSet result = null;
 
-        String query = "SELECT * FROM user WHERE user_id =?;";
+        String query = "SELECT * FROM user WHERE username =?;";
 
         try {
             dbConnection = connect();
             statement = dbConnection.prepareStatement(query);
-            statement.setInt(1, user_id);
+            statement.setString(1, username);
             result = statement.executeQuery();
 
             while (result.next()) {
-                int id = result.getInt("user_id");
-                String username = result.getString("username");
+                 username = result.getString("username");
                 String password = result.getString("password");
-                user = new User(id,username,password);
+                user = new User(username,password);
             }
         } finally {
             if (result != null) {
@@ -106,7 +105,7 @@ public class UserDAO {
             }
         }
         if (user == null)
-            System.out.println("The user does not exist with the id " + user_id);
+            System.out.println("Incorrect user credentials! Try again" );
         return user;
     }
 }

@@ -46,16 +46,16 @@ public class LoginHandler implements HttpHandler {
                         "        />" +
                         "        <div id=\"usernameHelp\" class=\"form-text\"></div>" +
                         "      </div>" +
-                        "      <div class=\"mb-3\">" +
-                        "        <label for=\"customer_id\" class=\"form-label\">Customer ID</label>" +
-                        "        <input name=\"customer_id\"" +
-                        "type=\"text\"" +
-                        "          class=\"form-control\"" +
-                        "          id=\"customer_id\"" +
-                        "          aria-describedby=\"customeridHelp\"" +
-                        "        />" +
-                        "        <div id=\"customeridHelp\" class=\"form-text\"></div>" +
-                        "      </div>" +
+//                        "      <div class=\"mb-3\">" +
+//                        "        <label for=\"customer_id\" class=\"form-label\">Customer ID</label>" +
+//                        "        <input name=\"customer_id\"" +
+//                        "type=\"text\"" +
+//                        "          class=\"form-control\"" +
+//                        "          id=\"customer_id\"" +
+//                        "          aria-describedby=\"customeridHelp\"" +
+//                        "        />" +
+//                        "        <div id=\"customeridHelp\" class=\"form-text\"></div>" +
+//                        "      </div>" +
                         "      <div class=\"mb-3\">" +
                         "        <label for=\"exampleInputPassword1\" class=\"form-label\">Password</label>" +
                         "        <input name=\"password\"" +
