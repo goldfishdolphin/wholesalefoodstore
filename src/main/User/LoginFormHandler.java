@@ -39,11 +39,11 @@ public class LoginFormHandler implements HttpHandler {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        int id = Integer.parseInt(map.get("customer_id"));
+//        int id = Integer.parseInt(map.get("customer_id"));
 
         storedUser = null;
         try {
-            storedUser = users.selectUser(id);
+            storedUser = users.selectUser(inputUsername);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class LoginFormHandler implements HttpHandler {
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(he.getResponseBody())));
         he.sendResponseHeaders(200, 0);
         try {
-             users.selectUser(id);
+             users.selectUser(inputUsername);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -133,5 +133,35 @@ public class Util {
         return null;
     }
 
+//    public static Map<String, String> itemKeyValuePairs(String itemString) {
+//        String[] pairs = itemString.split(", ");
+//        Map<String, String> productMap = new HashMap<>();
+//
+//        for (String pair : pairs) {
+//            String[] keyValue = pair.split("=");
+//            if (keyValue.length == 2) {
+//                String key = keyValue[0].trim().toLowerCase();
+//                String value = keyValue[1].trim();
+//                productMap.put(key, value);
+//            }
+//        }
+//
+//        return productMap;
+//    }
+public static Map<String, String> itemKeyValuePairs(String itemString) {
+    String[] pairs = itemString.split(", ");
+    Map<String, String> productMap = new java.util.HashMap<>();
+
+    for (String pair : pairs) {
+        String[] keyValue = pair.split("=");
+        if (keyValue.length == 2) {
+            String key = keyValue[0].trim();
+            String value = keyValue[1].trim();
+            productMap.put(key, value);
+        }
+    }
+
+    return productMap;
+}
 
 }
