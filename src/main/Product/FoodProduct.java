@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This is a Food Product object class.
+ */
 public class FoodProduct {
     private int id;
     private String SKU;
@@ -11,7 +14,14 @@ public class FoodProduct {
     private String category;
     private long price;
 
-
+    /**
+     * A constructor for the Food Product Class.
+     * @param ID
+     * @param SKU
+     * @param description
+     * @param category
+     * @param price
+     */
     public FoodProduct(int ID, String SKU, String description, String category, long price) {
         this.id = ID;
         this.SKU = SKU;
@@ -20,6 +30,11 @@ public class FoodProduct {
         this.price = price;
     }
 
+    /**
+     * This method creates precompiled SQL statements.
+     * @param statement SQL statement
+     * @throws SQLException
+     */
     public void assignParameters(PreparedStatement statement) throws SQLException {
         statement.setInt(1, id);
         statement.setString(2, SKU);

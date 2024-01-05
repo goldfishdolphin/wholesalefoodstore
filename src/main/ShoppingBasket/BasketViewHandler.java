@@ -1,28 +1,56 @@
-package main;
+package main.ShoppingBasket;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import main.Product.FoodProduct;
-import main.Product.FoodProductDAO;
+import main.Stock.FoodItemDOA;
 import main.User.SessionManager;
+import main.Util;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 import static main.Util.getCurrentSessionId;
 
-public class RootHandler implements HttpHandler {
+public class BasketViewHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
 
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
+//        String request = he.getRequestURI().getQuery();
+//        HashMap<String, String> map = Util.requestStringToMap(request);
+//        int id = Integer.parseInt(map.get("id"));
+        long totalBasketValue = 0;
+//        FoodItemDOA stockItem = new FoodItemDOA();
+//        String item = null;
+//        try {
+//
+//            item = String.valueOf(stockItem.selectItem(id));
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Map<String, String> mapBasketItem = Util.itemKeyValuePairs(item);
+//        String product = mapBasketItem.get("Product");
+//        int unit = 1;
+//        long unitPrice = Long.parseLong(mapBasketItem.get("Price"));
+//        long totalPrice = unit * unitPrice;
+//
+//
+        ShoppingBasketDAO basketDAO = new ShoppingBasketDAO();
+//        ShoppingBasket item1 = new ShoppingBasket(id, product, unit, unitPrice, totalPrice);
+//        basketDAO.upsert(item1);
+//        System.out.println("item" + item1);
+
+        List<ShoppingBasket> basketList = basketDAO.listBasketItems();
+
 
         String sessionId = getCurrentSessionId(he);
-
         String loggedInUser = null;
         if (sessionId != null) {
             loggedInUser = SessionManager.getLoggedInUser(sessionId);
@@ -30,8 +58,7 @@ public class RootHandler implements HttpHandler {
         } else {
             System.out.println("No Session ID found.");
         }
-        FoodProductDAO foodProducts = new FoodProductDAO();
-        List<FoodProduct> allProducts = foodProducts.listProduct();
+
 
         out.write(
                 "<html>" +
@@ -45,8 +72,7 @@ public class RootHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "<body>" +
-                        "<h1> Food Products !</h1>" +
-                        "<a href=\"/viewbasket\" class=\"btn btn-dark\"> Shopping Basket</a>"+
+                        "<h1> Shopping Basket !</h1>" +
                         "<div class=\"dropdown\">" +
                         "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
                         "        Choose Category" +
@@ -62,6 +88,7 @@ public class RootHandler implements HttpHandler {
                         "      </ul>" +
                         "    </div>" +
 
+
                         "<nav class=\"navbar bg-body-tertiary\">" +
                         "      <div class=\"container-fluid\">" +
                         "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
@@ -76,47 +103,41 @@ public class RootHandler implements HttpHandler {
                         "        </form>" +
                         "      </div>" +
                         "    </nav>" +
-
                         "<table class=\"table\">" +
                         "<thead>" +
                         "  <tr>" +
-                        "    <th>ID</th>" +
-                        "    <th>SKU</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Category</th>" +
-                        "    <th>Price</th>" +
+                        "    <th>Product ID</th>" +
+                        "    <th>Product</th>" +
+                        "    <th>Quantity</th>" +
+                        "    <th>Unit Price</th>" +
+                        "    <th>Total Price</th>" +
                         "  </tr>" +
                         "</thead>" +
                         "<tbody>");
-        for (FoodProduct p : allProducts) {
-            if (Objects.equals(loggedInUser, "admin")) {
-                out.write(p.toHTMLString());
-            } else {
-                out.write(p.toCustomerHTMLString());
-            }
+        for (ShoppingBasket b : basketList) {
+            out.write(b.toHTMLString());
+            totalBasketValue = totalBasketValue + b.getTotalPrice();
         }
+
         out.write(
                 "</tbody>" +
-                        "</table>");
-        if (Objects.equals(loggedInUser, "admin")) {
-            out.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
-                    "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>");
-            out.write("<a href=\"/stock\" class=\"btn btn-dark\"> Check Stock</a>");
-        }
+                        "</table>" +
 
-        if (loggedInUser != null) {
-            out.write("<a href=\"/logout\" class=\"btn btn-dark\"> Log Out</a>");
-        } else {
-            out.write("<a href=\"/login\" class=\"btn btn-dark\"> Log In</a>");
+                        "<div class=\"grid display-6 text-center text-lg\">" +
+                        "  <div class=\"g-col-3 display-6 g-start-2\">Total Basket Amount</div>" +
+                        "  <div class=\"g-col-4 display-6  g-start-6\">" + totalBasketValue + "</div>" +
+                        "</div>" +
 
-
-        }
-
-        out.write("</body>" +
-                "</html>"
+                        "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>"+
+                        "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>"+
+                        "<a href=\"/clear\" class=\"btn btn-danger\">Clear Basket</a>"+
+                        "</body>" +
+                        "</html>"
         );
 
         out.close();
 
     }
+
 }
+

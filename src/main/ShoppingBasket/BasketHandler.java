@@ -25,7 +25,7 @@ public class BasketHandler implements HttpHandler {
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
         int id = Integer.parseInt(map.get("id"));
-        long totalBasketValue = 0;
+
         FoodItemDOA stockItem = new FoodItemDOA();
         String item = null;
         try {
@@ -45,10 +45,6 @@ public class BasketHandler implements HttpHandler {
         ShoppingBasketDAO basketDAO = new ShoppingBasketDAO();
         ShoppingBasket item1 = new ShoppingBasket(id, product, unit, unitPrice, totalPrice);
         basketDAO.upsert(item1);
-        System.out.println("item" + item1);
-
-        List<ShoppingBasket> basketList = basketDAO.listBasketItems();
-
 
         String sessionId = getCurrentSessionId(he);
         String loggedInUser = null;
@@ -72,63 +68,9 @@ public class BasketHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "<body>" +
-                        "<h1> Shopping Basket !</h1>" +
-                        "<div class=\"dropdown\">" +
-                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
-                        "        Choose Category" +
-                        "      </button>" +
-                        "      <ul class=\"dropdown-menu\" style=\"\">" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
-                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
-                        "      </ul>" +
-                        "    </div>" +
-
-
-                        "<nav class=\"navbar bg-body-tertiary\">" +
-                        "      <div class=\"container-fluid\">" +
-                        "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
-                        "          <input" +
-                        "            class=\"form-control me-2\"" +
-                        "            type=\"search\"" +
-                        "            name=\"query\"" +
-                        "            placeholder=\"Search Products\"" +
-                        "            aria-label=\"Search\"" +
-                        "          />" +
-                        "          <button class=\"btn btn-outline-success\" type=\"submit\">Search</button>" +
-                        "        </form>" +
-                        "      </div>" +
-                        "    </nav>" +
-                        "<table class=\"table\">" +
-                        "<thead>" +
-                        "  <tr>" +
-                        "    <th>Product ID</th>" +
-                        "    <th>Product</th>" +
-                        "    <th>Quantity</th>" +
-                        "    <th>Unit Price</th>" +
-                        "    <th>Total Price</th>" +
-                        "  </tr>" +
-                        "</thead>" +
-                        "<tbody>");
-        for (ShoppingBasket b : basketList) {
-            out.write(b.toHTMLString());
-
-            totalBasketValue = totalBasketValue + b.getTotalPrice();
-            ;
-        }
-
-        out.write(
-                "</tbody>" +
-                        "</table>" +
-
-                        "<div class=\"grid display-6 text-center text-lg\">" +
-                        "  <div class=\"g-col-3 display-6 g-start-2\">Total Basket Amount</div>" +
-                        "  <div class=\"g-col-4 display-6  g-start-6\">" + totalBasketValue + "</div>" +
-                        "</div>" +
+                        "<h1> Item Added to the Basket!</h1>" +
+                        "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>"+
+                        "<a href=\"/viewbasket\" class=\"btn btn-dark\">Go to Basket</a>"+
                         "</body>" +
                         "</html>"
         );

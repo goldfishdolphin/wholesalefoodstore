@@ -28,6 +28,9 @@ public class DeleteHandler implements HttpHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        he.getResponseHeaders().set("Location", "/");
+        he.sendResponseHeaders(302, 0);
+        he.getResponseBody().close();
     }
 
 }
