@@ -3,7 +3,10 @@ package main;
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.Product.*;
-import main.ShoppingBasket.*;
+import main.ShoppingBasket.BasketHandler;
+import main.ShoppingBasket.BasketViewHandler;
+import main.ShoppingBasket.CheckOutHandler;
+import main.ShoppingBasket.ClearBasketHandler;
 import main.Stock.ExpiryHandler;
 import main.Stock.StockHandler;
 import main.User.LoginFormHandler;
@@ -18,7 +21,8 @@ import java.sql.SQLException;
 /**
  * @author Naureen Imran
  * @version 1.0
- * @link Please check the <a href="https://trello.com/b/mApzMSAF/food-store-project">Trello</a>  board to track the workflow.
+ * @link Please check the <a href="https://trello.com/b/mApzMSAF/food-store-project">Trello</a>
+ * board to track the workflow.
  * @since 2023-12-03
  */
 
@@ -52,11 +56,12 @@ public class Main {
         BasketHandler bh = new BasketHandler();
         BasketViewHandler bvh = new BasketViewHandler();
         CheckOutHandler coh = new CheckOutHandler();
-        ClearBasketHandler cbh =new ClearBasketHandler();
+        ClearBasketHandler cbh = new ClearBasketHandler();
 
 
         Main main = new Main();
-        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh, bh,bvh, coh,cbh);
+        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh,
+                fh, sth, exh, bh, bvh, coh, cbh);
 
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
@@ -68,10 +73,12 @@ public class Main {
 
     public void startServer(HttpServer server, RootHandler rh, ProductHandler ph, DeleteHandler dh,
                             EditHandler eh, InputProductHandler ih, FormProcessHandler fph, EditFormHandler efh,
-                            CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch, EditCustomerHandler ecuh,
-                            CustEditFormHandler cefh, AddCustomerHandler ach, CustomerFormProcessHandler cfph, LoginHandler lh,
-                            LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh, StockHandler sth, ExpiryHandler exh,
-                            BasketHandler bh, BasketViewHandler bvh, CheckOutHandler coh, ClearBasketHandler cbh) {
+                            CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch,
+                            EditCustomerHandler ecuh, CustEditFormHandler cefh, AddCustomerHandler ach,
+                            CustomerFormProcessHandler cfph, LoginHandler lh,
+                            LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh,
+                            StockHandler sth, ExpiryHandler exh, BasketHandler bh,
+                            BasketViewHandler bvh, CheckOutHandler coh, ClearBasketHandler cbh) {
 
         server.createContext("/", rh);
         server.createContext("/customers", ch);
@@ -95,7 +102,7 @@ public class Main {
         server.createContext("/stock", sth);
         server.createContext("/status", exh);
         server.createContext("/basket", bh);
-        server.createContext("/viewbasket",bvh);
+        server.createContext("/viewbasket", bvh);
         server.createContext("/checkout", coh);
         server.createContext("/clear", cbh);
 

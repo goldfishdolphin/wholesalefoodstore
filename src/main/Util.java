@@ -129,7 +129,6 @@ public class Util {
                 }
             }
         }
-
         return null;
     }
 
@@ -145,8 +144,6 @@ public static Map<String, String> itemKeyValuePairs(String itemString) {
             productMap.put(key, value);
         }
     }
-
     return productMap;
 }
-
 }
