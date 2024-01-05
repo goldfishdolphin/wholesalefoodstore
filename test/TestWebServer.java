@@ -4,7 +4,9 @@ import main.Main;
 import main.Product.*;
 import main.RootHandler;
 import main.ShoppingBasket.BasketHandler;
+import main.ShoppingBasket.BasketViewHandler;
 import main.ShoppingBasket.CheckOutHandler;
+import main.ShoppingBasket.ClearBasketHandler;
 import main.Stock.ExpiryHandler;
 import main.Stock.FoodItemDOA;
 import main.Stock.StockHandler;
@@ -17,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
- * This class tests different paths at http server  using JUnit and mockito.
+ * This class tests different paths at http server using JUnit and mockito.
  */
 public class TestWebServer {
     @Test
@@ -45,9 +47,11 @@ public class TestWebServer {
         StockHandler sth = new StockHandler();
         ExpiryHandler exh = new ExpiryHandler();
         BasketHandler bh = new BasketHandler();
+        BasketViewHandler bvh = new BasketViewHandler();
         CheckOutHandler coh = new CheckOutHandler();
+        ClearBasketHandler cbh = new ClearBasketHandler();
         Main main = new Main();
-        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth,exh,bh, coh);
+        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth,exh,bh,bvh, coh,cbh);
 
         verify(httpServer).createContext("/", rh);
         verify(httpServer).createContext("/product", ph);
@@ -70,7 +74,9 @@ public class TestWebServer {
         verify(httpServer).createContext("/stock", sth);
         verify(httpServer).createContext("/status", exh);
         verify(httpServer).createContext("/basket", bh);
+        verify(httpServer).createContext("/viewbasket", bvh);
         verify(httpServer).createContext("/checkout", coh);
+        verify(httpServer).createContext("/clear", cbh);
 
 
     }
