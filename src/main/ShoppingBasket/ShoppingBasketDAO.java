@@ -106,4 +106,31 @@ public class ShoppingBasketDAO {
         }
 
     }
+
+    public void emptyBasket() {
+        System.out.println("Emptying the shopping basket");
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        try {
+            dbConnection = connect();
+            String query = "DELETE FROM basket;";
+            statement = dbConnection.prepareStatement(query);
+            int result = statement.executeUpdate();
+            System.out.println("Number of rows deleted from basket table: " + result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -7,12 +7,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+
 public class CheckOutHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
 
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
+        ShoppingBasketDAO basket= new ShoppingBasketDAO();
+        basket.emptyBasket();
+
         out.write(" <html>" +
 
                 "<head>" +
