@@ -46,7 +46,7 @@ public class RootHandler implements HttpHandler {
                         "  </head>" +
                         "<body>" +
                         "<h1> Food Products !</h1>" +
-                        "<a href=\"/basket\" class=\"btn btn-dark\"> Shopping Basket</a>"+
+                        "<a href=\"/viewbasket\" class=\"btn btn-dark\"> Shopping Basket</a>"+
                         "<div class=\"dropdown\">" +
                         "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
                         "        Choose Category" +

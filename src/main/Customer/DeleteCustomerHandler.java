@@ -12,8 +12,6 @@ import java.util.Optional;
 
 public class DeleteCustomerHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
-
-        FoodProductDAO foodProducts = new FoodProductDAO();
         CustomerDAO customers = new CustomerDAO();
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
@@ -30,6 +28,9 @@ public class DeleteCustomerHandler implements HttpHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        he.getResponseHeaders().set("Location", "/");
+        he.sendResponseHeaders(302, 0);
+        he.getResponseBody().close();
     }
 
 }
