@@ -4,7 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.Product.*;
 import main.ShoppingBasket.BasketHandler;
-import main.ShoppingBasket.ShoppingBasket;
+import main.ShoppingBasket.CheckOutHandler;
 import main.ShoppingBasket.ShoppingBasketDAO;
 import main.Stock.ExpiryHandler;
 import main.Stock.StockHandler;
@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 
 public class Main {
-    private static final int PORT = 8081;
+    private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException, SQLException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -52,20 +52,18 @@ public class Main {
         StockHandler sth = new StockHandler();
         ExpiryHandler exh = new ExpiryHandler();
         BasketHandler bh = new BasketHandler();
-
+        CheckOutHandler coh = new CheckOutHandler();
 
 
         Main main = new Main();
-        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh,bh);
+        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh, bh, coh);
         ShoppingBasketDAO dao = new ShoppingBasketDAO();
         dao.listBasketItems();
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
 
         SessionManager sessionManager = new SessionManager();
-        System.out.println(sessionManager);
-//BasketHandler b =  new BasketHandler();
-//        System.out.println(b);
+
         CustomerMenuConsole customerMenuConsole = new CustomerMenuConsole();
         customerMenuConsole.displayMenu();
     }
@@ -75,7 +73,7 @@ public class Main {
                             CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch, EditCustomerHandler ecuh,
                             CustEditFormHandler cefh, AddCustomerHandler ach, CustomerFormProcessHandler cfph, LoginHandler lh,
                             LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh, StockHandler sth, ExpiryHandler exh,
-                            BasketHandler bh) {
+                            BasketHandler bh, CheckOutHandler coh) {
 
         server.createContext("/", rh);
         server.createContext("/customers", ch);
@@ -99,6 +97,7 @@ public class Main {
         server.createContext("/stock", sth);
         server.createContext("/status", exh);
         server.createContext("/basket", bh);
+        server.createContext("/checkout", coh);
 
 
         server.setExecutor(null);

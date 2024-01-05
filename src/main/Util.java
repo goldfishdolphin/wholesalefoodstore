@@ -85,7 +85,7 @@ public class Util {
     /**
      * This method converts a password string to hashed password string by appending padding bits and length, creating and Initialising MD buffer and processing message in 16-word block.
      *
-     * @param password
+     * @param password a string of password
      * @return hashedPassword String
      * @throws NoSuchAlgorithmException
      */
@@ -133,21 +133,6 @@ public class Util {
         return null;
     }
 
-//    public static Map<String, String> itemKeyValuePairs(String itemString) {
-//        String[] pairs = itemString.split(", ");
-//        Map<String, String> productMap = new HashMap<>();
-//
-//        for (String pair : pairs) {
-//            String[] keyValue = pair.split("=");
-//            if (keyValue.length == 2) {
-//                String key = keyValue[0].trim().toLowerCase();
-//                String value = keyValue[1].trim();
-//                productMap.put(key, value);
-//            }
-//        }
-//
-//        return productMap;
-//    }
 public static Map<String, String> itemKeyValuePairs(String itemString) {
     String[] pairs = itemString.split(", ");
     Map<String, String> productMap = new java.util.HashMap<>();

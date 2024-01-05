@@ -116,9 +116,7 @@ public class BasketHandler implements HttpHandler {
                         "<tbody>");
         for (ShoppingBasket b : basketList) {
             out.write(b.toHTMLString());
-
             totalBasketValue = totalBasketValue + b.getTotalPrice();
-            ;
         }
 
         out.write(
@@ -129,6 +127,9 @@ public class BasketHandler implements HttpHandler {
                         "  <div class=\"g-col-3 display-6 g-start-2\">Total Basket Amount</div>" +
                         "  <div class=\"g-col-4 display-6  g-start-6\">" + totalBasketValue + "</div>" +
                         "</div>" +
+
+                        "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>"+
+                        "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>"+
                         "</body>" +
                         "</html>"
         );

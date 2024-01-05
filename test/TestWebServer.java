@@ -4,6 +4,7 @@ import main.Main;
 import main.Product.*;
 import main.RootHandler;
 import main.ShoppingBasket.BasketHandler;
+import main.ShoppingBasket.CheckOutHandler;
 import main.Stock.ExpiryHandler;
 import main.Stock.FoodItemDOA;
 import main.Stock.StockHandler;
@@ -44,8 +45,9 @@ public class TestWebServer {
         StockHandler sth = new StockHandler();
         ExpiryHandler exh = new ExpiryHandler();
         BasketHandler bh = new BasketHandler();
+        CheckOutHandler coh = new CheckOutHandler();
         Main main = new Main();
-        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth,exh,bh);
+        main.startServer(httpServer, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth,exh,bh, coh);
 
         verify(httpServer).createContext("/", rh);
         verify(httpServer).createContext("/product", ph);
@@ -68,6 +70,7 @@ public class TestWebServer {
         verify(httpServer).createContext("/stock", sth);
         verify(httpServer).createContext("/status", exh);
         verify(httpServer).createContext("/basket", bh);
+        verify(httpServer).createContext("/checkout", coh);
 
 
     }
