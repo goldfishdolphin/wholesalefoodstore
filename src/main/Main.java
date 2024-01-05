@@ -3,9 +3,7 @@ package main;
 import com.sun.net.httpserver.HttpServer;
 import main.Customer.*;
 import main.Product.*;
-import main.ShoppingBasket.BasketHandler;
-import main.ShoppingBasket.CheckOutHandler;
-import main.ShoppingBasket.ShoppingBasketDAO;
+import main.ShoppingBasket.*;
 import main.Stock.ExpiryHandler;
 import main.Stock.StockHandler;
 import main.User.LoginFormHandler;
@@ -52,20 +50,20 @@ public class Main {
         StockHandler sth = new StockHandler();
         ExpiryHandler exh = new ExpiryHandler();
         BasketHandler bh = new BasketHandler();
+        BasketViewHandler bvh = new BasketViewHandler();
         CheckOutHandler coh = new CheckOutHandler();
+        ClearBasketHandler cbh =new ClearBasketHandler();
 
 
         Main main = new Main();
-        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh, bh, coh);
-        ShoppingBasketDAO dao = new ShoppingBasketDAO();
-        dao.listBasketItems();
+        main.startServer(server, rh, ph, dh, eh, ih, fph, efh, ch, ech, dch, ecuh, cefh, ach, cfph, lh, lfh, loh, sh, fh, sth, exh, bh,bvh, coh,cbh);
+
         MenuConsole menuConsole = new MenuConsole();
         menuConsole.displayMenu();
 
         SessionManager sessionManager = new SessionManager();
 
-        CustomerMenuConsole customerMenuConsole = new CustomerMenuConsole();
-        customerMenuConsole.displayMenu();
+
     }
 
     public void startServer(HttpServer server, RootHandler rh, ProductHandler ph, DeleteHandler dh,
@@ -73,7 +71,7 @@ public class Main {
                             CustomersHandler ch, EachCustomerHandler ech, DeleteCustomerHandler dch, EditCustomerHandler ecuh,
                             CustEditFormHandler cefh, AddCustomerHandler ach, CustomerFormProcessHandler cfph, LoginHandler lh,
                             LoginFormHandler lfh, LogoutHandler loh, SearchHandler sh, FilterHandler fh, StockHandler sth, ExpiryHandler exh,
-                            BasketHandler bh, CheckOutHandler coh) {
+                            BasketHandler bh, BasketViewHandler bvh, CheckOutHandler coh, ClearBasketHandler cbh) {
 
         server.createContext("/", rh);
         server.createContext("/customers", ch);
@@ -97,7 +95,9 @@ public class Main {
         server.createContext("/stock", sth);
         server.createContext("/status", exh);
         server.createContext("/basket", bh);
+        server.createContext("/viewbasket",bvh);
         server.createContext("/checkout", coh);
+        server.createContext("/clear", cbh);
 
 
         server.setExecutor(null);
