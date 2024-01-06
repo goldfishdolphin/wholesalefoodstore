@@ -46,22 +46,9 @@ public class RootHandler implements HttpHandler {
                         "  </head>" +
                         "<body>" +
                         "<h1> Food Products !</h1>" +
-                        "<a href=\"/viewbasket\" class=\"btn btn-dark\"> Shopping Basket</a>"+
-                        "<div class=\"dropdown\">" +
-                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
-                        "        Choose Category" +
-                        "      </button>" +
-                        "      <ul class=\"dropdown-menu\" style=\"\">" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
-                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
-                        "      </ul>" +
-                        "    </div>" +
 
+                        "<div class=\"hstack gap-3\">" +
+                        "<div class=\"p-2\">" +
                         "<nav class=\"navbar bg-body-tertiary\">" +
                         "      <div class=\"container-fluid\">" +
                         "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
@@ -76,7 +63,29 @@ public class RootHandler implements HttpHandler {
                         "        </form>" +
                         "      </div>" +
                         "    </nav>" +
+                        "</div>" +
 
+                        "  <div class=\"p-2 ms-auto\">" +
+                        "<div class=\"dropdown\">" +
+                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                        "        Choose Category" +
+                        "      </button>" +
+                        "      <ul class=\"dropdown-menu\" style=\"\">" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
+                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
+                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
+                        "      </ul>" +
+                        "    </div>" +
+                        "</div>" +
+                        " <div class=\"vr\"></div>" +
+                        "<div class=\"p-2\">" +
+                        "<a href=\"/viewbasket\" class=\"btn btn-dark\"> Shopping Basket</a>" +
+                        "</div>" +
+                        "    </div >" +
                         "<table class=\"table\">" +
                         "<thead>" +
                         "  <tr>" +
