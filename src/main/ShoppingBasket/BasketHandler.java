@@ -38,8 +38,8 @@ public class BasketHandler implements HttpHandler {
         Map<String, String> mapBasketItem = Util.itemKeyValuePairs(item);
         String product = mapBasketItem.get("Product");
         int unit = 1;
-        long unitPrice = Long.parseLong(mapBasketItem.get("Price"));
-        long totalPrice = unit * unitPrice;
+        double unitPrice = Double.parseDouble(mapBasketItem.get("Price"));
+        double totalPrice = unit * unitPrice;
 
 
         ShoppingBasketDAO basketDAO = new ShoppingBasketDAO();

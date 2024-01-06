@@ -2,17 +2,12 @@ package main.ShoppingBasket;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import main.Stock.FoodItemDOA;
 import main.User.SessionManager;
-import main.Util;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static main.Util.getCurrentSessionId;
 
@@ -22,31 +17,9 @@ public class BasketViewHandler implements HttpHandler {
 
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
-//        String request = he.getRequestURI().getQuery();
-//        HashMap<String, String> map = Util.requestStringToMap(request);
-//        int id = Integer.parseInt(map.get("id"));
-        long totalBasketValue = 0;
-//        FoodItemDOA stockItem = new FoodItemDOA();
-//        String item = null;
-//        try {
-//
-//            item = String.valueOf(stockItem.selectItem(id));
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Map<String, String> mapBasketItem = Util.itemKeyValuePairs(item);
-//        String product = mapBasketItem.get("Product");
-//        int unit = 1;
-//        long unitPrice = Long.parseLong(mapBasketItem.get("Price"));
-//        long totalPrice = unit * unitPrice;
-//
-//
-        ShoppingBasketDAO basketDAO = new ShoppingBasketDAO();
-//        ShoppingBasket item1 = new ShoppingBasket(id, product, unit, unitPrice, totalPrice);
-//        basketDAO.upsert(item1);
-//        System.out.println("item" + item1);
+        double totalBasketValue = 0;
 
+        ShoppingBasketDAO basketDAO = new ShoppingBasketDAO();
         List<ShoppingBasket> basketList = basketDAO.listBasketItems();
 
 
@@ -128,9 +101,9 @@ public class BasketViewHandler implements HttpHandler {
                         "  <div class=\"g-col-4 display-6  g-start-6\">" + totalBasketValue + "</div>" +
                         "</div>" +
 
-                        "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>"+
-                        "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>"+
-                        "<a href=\"/clear\" class=\"btn btn-danger\">Clear Basket</a>"+
+                        "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>" +
+                        "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>" +
+                        "<a href=\"/clear\" class=\"btn btn-danger\">Clear Basket</a>" +
                         "</body>" +
                         "</html>"
         );

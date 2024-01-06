@@ -22,7 +22,7 @@ public class FormProcessHandler implements HttpHandler {
         String SKU = map.get("SKU");
         String description = map.get("description");
         String category = map.get("category");
-        long price = Long.parseLong(map.get("price"));
+        double price = Double.parseDouble(map.get("price"));
 
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(he.getResponseBody())));
 
@@ -33,7 +33,10 @@ public class FormProcessHandler implements HttpHandler {
                 "<head> <title>Confirmation</title> </head>" +
                 "<body>" +
                 "<h1> Congratulations!</h1>" + "<h1> " + description +
-                " is added successfully.</h1>" + "<a href=\"/ \" class=\"btn btn-primary\"> Home </a>" +
+                " is added successfully.</h1>" +
+                "<a href=\"/ \" class=\"btn btn-primary\"> Home </a>" +
+                "<a href=\"/ \" class=\"btn btn-primary\"> All Products </a>" +
+
                 "</body>" +
                 "</html>");
         pw.close();

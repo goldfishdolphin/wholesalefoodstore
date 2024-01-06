@@ -15,14 +15,6 @@ import java.util.stream.Collectors;
  * This class creates a console to select the  menu options to view products list, search, delete, add and update a product.
  */
 public class MenuConsole {
-    FoodProductDAO foodProducts = new FoodProductDAO();
-
-    int id;
-    String SKU;
-    String description;
-    String category;
-    Long price;
-
     void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
         int selected;
