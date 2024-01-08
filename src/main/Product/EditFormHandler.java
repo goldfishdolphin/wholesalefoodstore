@@ -37,6 +37,7 @@ public class EditFormHandler implements HttpHandler {
         }
 
         String productString = String.valueOf(currentProduct);
+        System.out.println(productString);
         Map<String, String> productMap = Util.productKeyValuePairs(productString);
         SKU = productMap.get("SKU");
         description = productMap.get("Description");

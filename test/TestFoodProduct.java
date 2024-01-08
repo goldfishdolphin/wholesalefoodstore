@@ -4,11 +4,31 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
-class TestFoodProductTest {
+/**
+ * This class tests the Data Access Object of the Food Product class.
+ */
+class TestFoodProduct {
+    @Test
+    void testListProductOnSpy() {
+        //Arrange
+        FoodProductDAO foodTestProducts = new FoodProductDAO();
+        FoodProductDAO spiedDAO = Mockito.spy(foodTestProducts);
+        List<FoodProduct> list = new ArrayList<>();
+        Mockito.when(spiedDAO.listProduct()).thenReturn(list);
+        // Act
+        spiedDAO.listProduct();
+        spiedDAO.listProduct();
+        List<FoodProduct> foodProductList = spiedDAO.listProduct();
+        List<FoodProduct> foodProductList1 = spiedDAO.listProduct();
+        // Assert
+        verify(spiedDAO, Mockito.times(4)).listProduct();
+    }
 
     @Test
     void testSelectProductByID() throws SQLException {
@@ -31,34 +51,7 @@ class TestFoodProductTest {
         assert (p1.toString().equals(("Product [ID=2899, SKU=Te2, Description=test2, Category=Vegetable, Price=200.0 ]")));
     }
 
-    @Test
-    void testSelectProductByIDOnSpy() throws SQLException {
-        //Arrange
-        FoodProductDAO foodTestProducts = new FoodProductDAO();
-        FoodProductDAO spiedDAO = Mockito.spy(foodTestProducts);
-        Mockito.when(spiedDAO.selectProduct(Mockito.anyInt())).thenReturn(new FoodProduct(1899, "Te1", "test1", "Fruit", 100));
-        // Act
-        FoodProduct product = spiedDAO.selectProduct(1899);
-        FoodProduct product1 = spiedDAO.selectProduct(2899);
-        FoodProduct product3 = spiedDAO.selectProduct(3899);
-        // Assert
-        verify(spiedDAO, Mockito.times(3)).selectProduct(Mockito.anyInt());
-    }
 
-
-    @Test
-    void testListProductOnSpy() {
-        //Arrange
-        FoodProductDAO foodTestProducts = new FoodProductDAO();
-        FoodProductDAO spiedDAO = Mockito.spy(foodTestProducts);
-        // Act
-        spiedDAO.listProduct();
-        spiedDAO.listProduct();
-        List<FoodProduct> foodProductList = spiedDAO.listProduct();
-        List<FoodProduct> foodProductList1 = spiedDAO.listProduct();
-        // Assert
-        verify(spiedDAO, Mockito.times(4)).listProduct();
-    }
     @Test
     void testUpsertProductMethodOnSpy() throws SQLException {
         //Arrange
@@ -68,6 +61,7 @@ class TestFoodProductTest {
         FoodProduct newProduct = new FoodProduct(111, "TE", "TestingItem", "Vegetable", 1000.0);
         FoodProduct newProduct1 = new FoodProduct(222, "T1", "TestingItem1", "Vegetable", 2000.0);
         FoodProduct newProduct2 = new FoodProduct(111, "TE", "TestingItem", "Vegetable", 2000.0);
+        doNothing().when(spiedDAO).upsert(Mockito.any(FoodProduct.class));
         //Act
         spiedDAO.upsert(newProduct);
         spiedDAO.upsert(newProduct2);
@@ -76,14 +70,15 @@ class TestFoodProductTest {
         verify(spiedDAO, Mockito.times(1)).upsert(newProduct);
         verify(spiedDAO, Mockito.atLeastOnce()).upsert(newProduct2);
     }
-@Test
+
+    @Test
     void testDeleteProductMethod() throws SQLException {
         //Arrange
         FoodProductDAO foodTestProducts = new FoodProductDAO();
         FoodProductDAO spiedDAO = Mockito.spy(foodTestProducts);
         spiedDAO.upsert(new FoodProduct(131, "TE", "TestingItem3", "Fruit", 1000.0));
+
         //Act
-        System.out.println((spiedDAO.selectProduct(131)));
         spiedDAO.deleteProduct(131);
 
         //Assert

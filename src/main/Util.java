@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class create simple utility methods to convert different string formats to get data.
+ */
 public class Util {
     public static HashMap<String, String> requestStringToMap(String request) {
         HashMap<String, String> map = new HashMap<>();
