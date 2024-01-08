@@ -17,7 +17,7 @@ public class EditFormHandler implements HttpHandler {
         String description;
         String SKU;
         String category;
-        long price;
+        double price;
 
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
@@ -37,11 +37,12 @@ public class EditFormHandler implements HttpHandler {
         }
 
         String productString = String.valueOf(currentProduct);
+        System.out.println(productString);
         Map<String, String> productMap = Util.productKeyValuePairs(productString);
         SKU = productMap.get("SKU");
         description = productMap.get("Description");
         category = productMap.get("Category");
-        price = Long.parseLong(productMap.get("Price"));
+        price = Double.parseDouble(productMap.get("Price"));
 
 
         String line;
@@ -73,30 +74,28 @@ public class EditFormHandler implements HttpHandler {
         }
 
         String newPriceStr = inputMap.get("price");
-        Long newPrice = (newPriceStr != null && !newPriceStr.isEmpty()) ? Long.parseLong(newPriceStr) : null;
+        Double newPrice = (newPriceStr != null && !newPriceStr.isEmpty()) ? Double.parseDouble(newPriceStr) : null;
         if (newPrice != null) {
             price = newPrice;
         }
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(he.getResponseBody())));
+        he.getResponseHeaders().set("Content-Type", "text/html");
+        he.sendResponseHeaders(200, 0);
 
-        try (PrintWriter pw = new PrintWriter(new BufferedWriter(
-                new OutputStreamWriter(he.getResponseBody())))) {
+        foodProducts.upsert(new FoodProduct(id, SKU, description, category, price));
 
-            he.getResponseHeaders().set("Content-Type", "text/html");
-            he.sendResponseHeaders(200, 0);
-            foodProducts.upsert(new FoodProduct(id, SKU, description, category, price));
-
-            pw.println(
-                    "<html>" +
-                            "<head> <title>Confirmation</title> </head>" +
-                            "<body>" +
-                            "<h1> Congratulations!</h1>" +
-                            "<h1> The product with id " + id + " is updated successfully.</h1>" +
-                            "<a href=\"/ \" class=\"btn btn-primary\"> Home </a>" +
-                            "</body>" +
-                            "</html>");
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
+        pw.println(
+                "<html>" +
+                        "<head> <title>Confirmation</title> </head>" +
+                        "<body>" +
+                        "<h1> Congratulations!</h1>" +
+                        "<h1> The product with id " + id + " is updated successfully.</h1>" +
+                        "<a href=\"/ \" class=\"btn btn-primary\"> Home </a>" +
+                        "</body>" +
+                        "</html>");
+        pw.close();
     }
+
 }
+
+

@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class impletments http request to process the edit input to edit the customer object using web interface.
+ */
 public class CustEditFormHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
 

@@ -7,11 +7,11 @@ public class ShoppingBasket {
 private int product_id;
     private String product;
     private int units;
-    private long unitPrice;
-    private long totalPrice;
+    private double unitPrice;
+    private double totalPrice;
 
 
-    public ShoppingBasket(int productId, String product, int units, long unitPrice, long totalPrice) {
+    public ShoppingBasket(int productId, String product, int units, double unitPrice, double totalPrice) {
         product_id = productId;
         this.product = product;
         this.units = units;
@@ -24,12 +24,12 @@ private int product_id;
         statement.setInt(1, product_id);
         statement.setString(2, product);
         statement.setInt(3, units);
-        statement.setLong(4, unitPrice);
-        statement.setLong(5, totalPrice);
+        statement.setDouble(4, unitPrice);
+        statement.setDouble(5, totalPrice);
     }
 
 
-    public long getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 

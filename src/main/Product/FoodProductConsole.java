@@ -16,7 +16,7 @@ public class FoodProductConsole {
     String SKU;
     String description;
     String category;
-    Long price;
+    double price;
 
     public void displayMenu() throws SQLException {
         Scanner in = new Scanner(System.in);
@@ -58,7 +58,7 @@ public class FoodProductConsole {
                     System.out.println("Please enter the category of the product you want to add");
                     category = in.nextLine();
                     System.out.println("Please enter the Price of the product you want to add");
-                    price = in.nextLong();
+                    price = in.nextDouble();
 
                     foodProducts.upsert(new FoodProduct(id, SKU, description, category, price));
                     System.out.println("Product Added!");
@@ -74,7 +74,7 @@ public class FoodProductConsole {
                         SKU = productMap.get("SKU");
                         description = productMap.get("Description");
                         category = productMap.get("Category");
-                        price = Long.parseLong(productMap.get("Price"));
+                        price = Double.parseDouble(productMap.get("Price"));
                         System.out.println("Do you want to edit SKU? y/n");
                         String option = in.next();
                         in.nextLine();
@@ -107,7 +107,7 @@ public class FoodProductConsole {
 
                         if (option.equals("y")) {
                             System.out.println("Enter new Price: ");
-                            price = in.nextLong();
+                            price = in.nextDouble();
                         }
                         foodProducts.upsert(new FoodProduct(id, SKU, description, category, price));
                     }

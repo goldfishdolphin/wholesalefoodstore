@@ -8,7 +8,6 @@ import main.ShoppingBasket.BasketViewHandler;
 import main.ShoppingBasket.CheckOutHandler;
 import main.ShoppingBasket.ClearBasketHandler;
 import main.Stock.ExpiryHandler;
-import main.Stock.FoodItemDOA;
 import main.Stock.StockHandler;
 import main.User.LoginFormHandler;
 import main.User.LoginHandler;
@@ -77,7 +76,5 @@ public class TestWebServer {
         verify(httpServer).createContext("/viewbasket", bvh);
         verify(httpServer).createContext("/checkout", coh);
         verify(httpServer).createContext("/clear", cbh);
-
-
     }
 }

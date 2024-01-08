@@ -34,8 +34,8 @@ public class ShoppingBasketDAO {
                     int id = result.getInt("product_id");
                     String product = result.getString("product");
                     int units = result.getInt("units");
-                    long unitPrice = result.getLong("price");
-                    long totalPrice = unitPrice * units;
+                    double unitPrice = result.getDouble("price");
+                    double totalPrice = unitPrice * units;
 
                     basketItems.add(new ShoppingBasket(id, product, units, unitPrice, totalPrice));
                 } while (result.next());

@@ -6,6 +6,16 @@ import java.util.List;
 
 
 public class FoodProductDAO {
+    private static FoodProductDAO instance;
+    private Connection connection;
+    public static FoodProductDAO getInstance(String jdbcUrl) throws SQLException {
+        if (instance == null) {
+            instance = new FoodProductDAO();
+            instance.connection = instance.connect();
+        }
+        return instance;
+    }
+
     /**
      * This function create a connection java class and the database
      *
@@ -18,6 +28,10 @@ public class FoodProductDAO {
         return DriverManager.getConnection(dbURL);
     }
 
+    /**
+     * This method returns all the products in the database.
+     * @return a list of food items in the list.
+     */
     public List<FoodProduct> listProduct() {
         System.out.println("Listing all products...");
         Connection dbConnection = null;
@@ -35,7 +49,7 @@ public class FoodProductDAO {
                 String SKU = result.getString("SKU");
                 String description = result.getString("description");
                 String category = result.getString("category");
-                long price = result.getLong("price");
+                double price = result.getDouble("price");
 
                 foodProducts.add(new FoodProduct(id, SKU, description, category, price));
             }
@@ -91,7 +105,7 @@ public class FoodProductDAO {
                 String SKU = result.getString("SKU");
                 String description = result.getString("Description");
                 String category = result.getString("Category");
-                long price = result.getLong("Price");
+                double price = result.getDouble("Price");
                 product = new FoodProduct(id, SKU, description, category, price);
             }
         } finally {
@@ -124,7 +138,7 @@ public class FoodProductDAO {
         return product;
     }
 
-    public void deleteProduct(int product_id) {
+    public boolean deleteProduct(int product_id) {
         System.out.println("Deleting the product");
         Connection dbConnection = null;
         PreparedStatement statement = null;
@@ -134,7 +148,11 @@ public class FoodProductDAO {
             dbConnection = connect();
             statement = dbConnection.prepareStatement(query);
             statement.setInt(1, product_id);
-            result = statement.executeUpdate();
+            if (selectProduct(product_id) != null && product_id > 0) {
+                result = statement.executeUpdate();
+                System.out.println("The product with id " + product_id + " has been deleted!");
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -154,9 +172,8 @@ public class FoodProductDAO {
                 e.printStackTrace();
             }
         }
-        System.out.println("The product with id " + product_id + " has been deleted!");
+        return false;
     }
-
 
     public void upsert(FoodProduct product) {
         PreparedStatement statement = null;

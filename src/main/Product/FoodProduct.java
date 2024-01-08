@@ -2,7 +2,6 @@ package main.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * This is a Food Product object class.
@@ -12,17 +11,18 @@ public class FoodProduct {
     private String SKU;
     private String description;
     private String category;
-    private long price;
+    private double price;
 
     /**
      * A constructor for the Food Product Class.
-     * @param ID
-     * @param SKU
-     * @param description
+     *
+     * @param ID          is an integer to reelect the id number of the food product.
+     * @param SKU         is a string to identify the unique identifier for the product.
+     * @param description is a string to describe the product.
      * @param category
      * @param price
      */
-    public FoodProduct(int ID, String SKU, String description, String category, long price) {
+    public FoodProduct(int ID, String SKU, String description, String category, double price) {
         this.id = ID;
         this.SKU = SKU;
         this.description = description;
@@ -30,8 +30,25 @@ public class FoodProduct {
         this.price = price;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int i) {
+        this.id = i;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     /**
      * This method creates precompiled SQL statements.
+     *
      * @param statement SQL statement
      * @throws SQLException
      */
@@ -40,7 +57,7 @@ public class FoodProduct {
         statement.setString(2, SKU);
         statement.setString(3, description);
         statement.setString(4, category);
-        statement.setLong(5, price);
+        statement.setDouble(5, price);
     }
 
     /**
@@ -72,7 +89,7 @@ public class FoodProduct {
                 "<td>" + category + "</td>" +
                 "<td>" + price + "</td>" +
                 "<td><a href=\"/product?id=" + id + "\" class=\"btn btn-primary\"> View </a></td>" +
-                  "<td><a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\"> Add to Basket </a></td>" +
+                "<td><a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\"> Add to Basket </a></td>" +
                 "</tr>";
     }
 
@@ -96,8 +113,20 @@ public class FoodProduct {
         return
 
                 "<h5 class=\"card-title\">" + SKU + "</h5>" + "<p class=\"card-text\"> " + description + "</p>" +
-                        "<a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\"> <i class=\"bi bi-basket2-fill\"></i>Add to Basket </a>"+
+                        "<a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\"> <i class=\"bi bi-basket2-fill\"></i>Add to Basket </a>" +
                         "<br/><br/><br/>" +
                         "<a href=\"/\" class=\"btn btn-primary\"> Home </a>";
+    }
+
+    public void setSKU(String SKU) {
+        this.SKU = SKU;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
