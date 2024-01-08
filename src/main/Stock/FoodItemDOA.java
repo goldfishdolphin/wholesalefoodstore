@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * This class creates a DAO for the stock level of Food items.
+ */
 public class FoodItemDOA {
     private Connection connect() throws SQLException {
         String dbURL = "jdbc:sqlite:foodstore.sql";

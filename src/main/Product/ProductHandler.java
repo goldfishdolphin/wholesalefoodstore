@@ -45,11 +45,13 @@ public class ProductHandler implements HttpHandler {
                         "  </head>" +
                         "  <body" +
                         "    class=\"p-3 m-0 border-0 bd-example m-0 border-0\"" +
-                        "    style=\"background-color: pink\"" +
-                        "  >" +
-                        "    <div class=\"card\" style=\"width: 18rem\">" +
+                        "    style=\"background-color: lightgreen\"" +
+                        "  >" );
+//        String image1 =
+
+        out.write(                "    <div class=\"card\" style=\"width: 18rem\">" +
                         "      <img" +
-                        "        src=\"https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500\"" +
+                        "        src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"" +
                         "        class=\"card-img-top\"" +
                         "        alt=\"fruit\"" +
                         "      />" +
