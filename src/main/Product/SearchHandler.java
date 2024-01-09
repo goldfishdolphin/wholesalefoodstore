@@ -76,13 +76,6 @@ public class SearchHandler implements HttpHandler {
                             "            <li class=\"nav-item\">" +
                             "              <a class=\"nav-link\" href=\"/\">Home</a>" +
                             "            </li>" +
-                            "            <li class=\"nav-item\">" +
-                            " <a class=\"nav-link\" href=\"/customers\">Customers</a>" +
-                            "            </li>" +
-                            "            <li class=\"nav-item\">" +
-                            "<a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Stock</a>" +
-                            "            </li>" +
-                            "            </li>" +
                             "          </ul>" +
                             "        </div>" +
                             "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
@@ -102,8 +95,7 @@ public class SearchHandler implements HttpHandler {
                             "      </div>" +
                             "    </nav>" +
 
-
-                            "<table class=\"table\">" +
+                            "<table class=\"table  table-light table-striped\">" +
                             "<thead>" +
                             "  <tr>" +
                             "    <th>ID</th>" +
