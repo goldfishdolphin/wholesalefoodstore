@@ -6,7 +6,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
+/**
+ * This is an object for the stock level in the store.
+ */
 public class FoodItem {
 
     private int id;

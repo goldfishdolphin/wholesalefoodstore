@@ -1,6 +1,8 @@
 package main.Customer;
 
-
+/**
+ * This class creates an address object.
+ */
 public class Address {
     private String addressLine1;
     private  String addressLine2;

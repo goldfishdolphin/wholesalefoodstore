@@ -7,6 +7,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * This class adds a new customer.
+ */
 public class AddCustomerHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
 

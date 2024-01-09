@@ -7,6 +7,9 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+/**
+ * This class returns a webpage for the product input form to add a new item.
+ */
     public class InputProductHandler implements HttpHandler {
         public void handle(HttpExchange he) throws IOException {
 
@@ -63,6 +66,7 @@ import java.io.IOException;
                             "      </div>"+
                             "      <button type=\"submit\" class=\"btn btn-primary\">Submit</button>"+
                             "    </form>"+
+                            "<a href=\"/\" class=\"btn btn-dark\"> Home </a>"+
                             "  </body>"+
                             "</html>"
             );

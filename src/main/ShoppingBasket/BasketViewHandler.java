@@ -11,6 +11,10 @@ import java.util.List;
 
 import static main.Util.getCurrentSessionId;
 
+/**
+ * This a basket view object to display basket items and value.
+ */
+
 public class BasketViewHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
@@ -45,25 +49,27 @@ public class BasketViewHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "<body>" +
-                        "<h1> Shopping Basket !</h1>" +
-                        "<div class=\"dropdown\">" +
-                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
-                        "        Choose Category" +
-                        "      </button>" +
-                        "      <ul class=\"dropdown-menu\" style=\"\">" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Fruit\">Fruit</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Vegetable\">Vegetable</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Rice\">Rice</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Cold Drink\">Cold Drink</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Frozen Food\">Frozen Food</a></li>" +
-                        "        <li><a class=\"dropdown-item\" href=\"filter?Category=Snack\">Snack</a></li>" +
-                        "<li><a class=\"dropdown-item\" href=\"/\">All</a></li>" +
-                        "      </ul>" +
-                        "    </div>" +
 
-
-                        "<nav class=\"navbar bg-body-tertiary\">" +
+                        "<div class=\"card \">" +
+                        "      <img class=\"card-img\" src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"  alt=\"Card image\">" +
+                        "      <div class=\"card-img-overlay text-end\">" +
+                        "<h1 class=\"text-center\"> Shopping basket !</h1>" +
+                        "    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">" +
                         "      <div class=\"container-fluid\">" +
+                        "        <a class=\"navbar-brand\" href=\"/\">Food Store</a>" +
+                        "        <button class=\"navbar-toggler\" type=\"button\" " +
+                        "data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">" +
+                        "          <span class=\"navbar-toggler-icon\"></span>" +
+                        "        </button>" +
+                        "        <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">" +
+                        "          <ul class=\"navbar-nav\">" +
+                        "            <li class=\"nav-item\">" +
+                        "              <a class=\"nav-link\" href=\"/\">Home</a>" +
+                        "            </li>" +
+                        "          </ul>" +
+                        "        </div>" +
+                        "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
+                        "      <div class=\"container-fluid \">" +
                         "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
                         "          <input" +
                         "            class=\"form-control me-2\"" +
@@ -74,6 +80,8 @@ public class BasketViewHandler implements HttpHandler {
                         "          />" +
                         "          <button class=\"btn btn-outline-success\" type=\"submit\">Search</button>" +
                         "        </form>" +
+                        "      </div>" +
+                        "    </nav>" +
                         "      </div>" +
                         "    </nav>" +
                         "<table class=\"table\">" +
@@ -96,14 +104,19 @@ public class BasketViewHandler implements HttpHandler {
                 "</tbody>" +
                         "</table>" +
 
-                        "<div class=\"grid display-6 text-center text-lg\">" +
-                        "  <div class=\"g-col-3 display-6 g-start-2\">Total Basket Amount</div>" +
-                        "  <div class=\"g-col-4 display-6  g-start-6\">" + totalBasketValue + "</div>" +
+                        "<div class=\"grid display-6 text-center text-lg text-success\">" +
+                        "  <div class=\"g-col-3 display-6 g-start-6\">Total Basket Amount: " + totalBasketValue + "</div>" +
                         "</div>" +
 
                         "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>" +
                         "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>" +
                         "<a href=\"/clear\" class=\"btn btn-danger\">Clear Basket</a>" +
+                        "<footer  class=\"text-center p-4 bg-dark text-light fixed-bottom\">" +
+                        "      <p>© Naureen Imran | Manchester Metropolitan University | <span id=\"currentYear\"></span></p>" +
+                        "<script>" +
+                        "        document.getElementById(\"currentYear\").innerHTML = new Date().getFullYear();" +
+                        "    </script>" +
+                        "  </footer>"+
                         "</body>" +
                         "</html>"
         );

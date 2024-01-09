@@ -1,1 +1,7 @@
 unnamed package
+main
+main.Customer
+main.Product
+main.ShoppingBasket
+main.Stock
+main.User

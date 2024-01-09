@@ -9,6 +9,9 @@ import com.sun.net.httpserver.HttpExchange;
         import java.io.OutputStreamWriter;
         import java.util.HashMap;
 
+/**
+ * This class create a form to edit the product.
+ */
 public class EditHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);

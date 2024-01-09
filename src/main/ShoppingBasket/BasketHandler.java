@@ -16,6 +16,9 @@ import java.util.Map;
 
 import static main.Util.getCurrentSessionId;
 
+/**
+ * This is a basket handler class object to add items to basket.
+ */
 public class BasketHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);

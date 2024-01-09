@@ -26,7 +26,10 @@ import java.sql.SQLException;
  * @since 2023-12-03
  */
 
-
+/**
+ * This the main class to manage the food store.
+ * It consists of a Menu Console, Session Manager and a Http Server
+ */
 public class Main {
     private static final int PORT = 8080;
 

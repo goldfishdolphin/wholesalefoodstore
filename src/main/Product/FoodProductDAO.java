@@ -4,18 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This is a DAO class that builds connection with the database to make queries.
+ */
 public class FoodProductDAO {
-    private static FoodProductDAO instance;
-    private Connection connection;
-    public static FoodProductDAO getInstance(String jdbcUrl) throws SQLException {
-        if (instance == null) {
-            instance = new FoodProductDAO();
-            instance.connection = instance.connect();
-        }
-        return instance;
-    }
-
     /**
      * This function create a connection java class and the database
      *

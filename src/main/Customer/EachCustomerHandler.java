@@ -10,6 +10,9 @@ import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+/**
+ * This class display the information of the each customer.
+ */
 public class EachCustomerHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);

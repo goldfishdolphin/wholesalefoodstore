@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is an object that updates  product information.
+ */
 public class EditFormHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
 
@@ -37,7 +40,6 @@ public class EditFormHandler implements HttpHandler {
         }
 
         String productString = String.valueOf(currentProduct);
-        System.out.println(productString);
         Map<String, String> productMap = Util.productKeyValuePairs(productString);
         SKU = productMap.get("SKU");
         description = productMap.get("Description");

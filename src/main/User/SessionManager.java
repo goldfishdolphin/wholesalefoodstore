@@ -3,6 +3,9 @@ package main.User;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class creates a session manager for current logged-in user.
+ */
 public class SessionManager {
     private static final Map<String, String> sessions = new HashMap<>();
 

@@ -49,6 +49,11 @@ public class Util {
         return productMap;
     }
 
+    /**
+     * This method converts a string request that has Category in the path to a key value pair using Hashmap.
+     * @param request a URL of the request
+     * @return a key value pair
+     */
     public static HashMap<String, String> editStringToMap(String request) {
         HashMap<String, String> mapInput = new HashMap<>();
         String[] pairs = request.split("&");
@@ -71,9 +76,14 @@ public class Util {
         return mapInput;
     }
 
-    public static Map<String, String> customerKeyValuePairs(String productString) {
-        productString = productString.substring(productString.indexOf('[') + 1, productString.indexOf(']')).trim();
-        String[] pairs = productString.split(",\\s*");
+    /**
+     * This method converts string to key value pairs by removing [].
+     * @param customerString The String of the customer output class.
+     * @return a key value pair of a customer string.
+     */
+    public static Map<String, String> customerKeyValuePairs(String customerString) {
+        customerString = customerString.substring(customerString.indexOf('[') + 1, customerString.indexOf(']')).trim();
+        String[] pairs = customerString.split(",\\s*");
         Map<String, String> productMap = new HashMap<>();
 
         for (String pair : pairs) {
@@ -103,6 +113,11 @@ public class Util {
         return hashedString;
     }
 
+    /**
+     * This method returns the key value pairs  for strings of the products.
+     * @param productString a string of the product class output.
+     * @return key value a pair of  product information
+     */
     public static Map<String, String>  userKeyValuePairs(String productString) {
 
         String[] pairs = productString.split(",\\s*");
@@ -116,6 +131,12 @@ public class Util {
         }
         return productMap;
     }
+
+    /**
+     * The method returns current unique session id for the  logged-in user.
+     * @param he Http request
+     * @return the current session id
+     */
     public static String getCurrentSessionId(HttpExchange he) {
         List<String> cookies = he.getRequestHeaders().get("Cookie");
 
@@ -135,7 +156,12 @@ public class Util {
         return null;
     }
 
-public static Map<String, String> itemKeyValuePairs(String itemString) {
+    /**
+     * This method returns key value pairs of a string.
+     * @param itemString A string of items that have key value pairs seperated by ",".
+     * @return Map of key-value pairs
+     */
+    public static Map<String, String> itemKeyValuePairs(String itemString) {
     String[] pairs = itemString.split(", ");
     Map<String, String> productMap = new java.util.HashMap<>();
 

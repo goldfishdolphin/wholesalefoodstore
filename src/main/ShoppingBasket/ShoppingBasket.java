@@ -3,6 +3,9 @@ package main.ShoppingBasket;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * This class creates a shopping basket object.
+ */
 public class ShoppingBasket {
 private int product_id;
     private String product;

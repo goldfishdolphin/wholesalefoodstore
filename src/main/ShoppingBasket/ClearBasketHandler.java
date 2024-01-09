@@ -5,6 +5,9 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 
+/**
+ * This class object reset the basket by removing all items from the basket.
+ */
 public class ClearBasketHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         ShoppingBasketDAO basket = new ShoppingBasketDAO();
