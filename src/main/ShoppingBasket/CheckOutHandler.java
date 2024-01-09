@@ -7,7 +7,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-
+/**
+ * This class process checkout by resetting the basket and display confirmation.
+ */
 public class CheckOutHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);

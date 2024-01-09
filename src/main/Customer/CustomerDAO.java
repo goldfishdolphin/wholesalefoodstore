@@ -5,7 +5,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This is a data access object that creates a connection with customers data in the database.
+ */
 public class CustomerDAO {
     /**
      * This function create a connection java class and the database

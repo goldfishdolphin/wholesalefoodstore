@@ -4,6 +4,10 @@ package main.Customer;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * This class creates a customer object.
+ */
+
 public class Customer {
     private int customerID;
     private String businessName;
@@ -39,9 +43,9 @@ public class Customer {
                 "<td>" + businessName + "</td>" +
                 "<td>" + phoneNumber + "</td>" +
                 "<td>" + address + "</td>" +
-                "<td><a href=\"/customer?id="+customerID+"\" class=\"btn btn-primary\"> View </a></td>"+
-                "<td><a href=\"/deletecustomer?id="+customerID+"\" class=\"btn btn-primary\"> Delete </a></td>" +
-                "<td><a href=\"/editcustomer?id="+customerID+"\" class=\"btn btn-primary\"> Edit </a></td>" +
+                "<td><a href=\"/customer?id="+customerID+"\" class=\"btn btn-dark\"> View </a></td>"+
+                "<td><a href=\"/deletecustomer?id="+customerID+"\" class=\"btn btn-dark\"> Delete </a></td>" +
+                "<td><a href=\"/editcustomer?id="+customerID+"\" class=\"btn btn-dark\"> Edit </a></td>" +
                 "</tr>";
     }
 
@@ -54,6 +58,6 @@ public class Customer {
     public String toCustomertHTMLString() {
         return
                 "<h5 class=\"card-title\">" + customerID + "</h5>" + "<p class=\"card-text\">" + businessName + "</p>" +
-                        "<a href=\"/\" class=\"btn btn-primary\"> Home </a>";
+                        "<a href=\"/\" class=\"btn btn-dark\"> Home </a>";
     }
 }

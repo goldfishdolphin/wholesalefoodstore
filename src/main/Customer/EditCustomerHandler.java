@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
+/**
+ * This class create a form for editing the customer's information.
+ */
 public class EditCustomerHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);

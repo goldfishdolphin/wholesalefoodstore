@@ -71,9 +71,9 @@ public class FoodProduct {
                 "<td>" + description + "</td>" +
                 "<td>" + category + "</td>" +
                 "<td>" + price + "</td>" +
-                "<td><a href=\"/product?id=" + id + "\" class=\"btn btn-primary\"> View </a></td>" +
-                "<td><a href=\"/delete?id=" + id + "\" class=\"btn btn-primary\"> Delete </a></td>" +
-                "<td><a href=\"/edit?id=" + id + "\" class=\"btn btn-primary\"> Edit </a></td>" +
+                "<td><a href=\"/product?id=" + id + "\" class=\"btn btn-dark\"> View </a></td>" +
+                "<td><a href=\"/delete?id=" + id + "\" class=\"btn btn-dark\"> Delete </a></td>" +
+                "<td><a href=\"/edit?id=" + id + "\" class=\"btn btn-dark\"> Edit </a></td>" +
                 "</tr>";
     }
 
@@ -88,8 +88,8 @@ public class FoodProduct {
                 "<td>" + description + "</td>" +
                 "<td>" + category + "</td>" +
                 "<td>" + price + "</td>" +
-                "<td><a href=\"/product?id=" + id + "\" class=\"btn btn-primary\"> View </a></td>" +
-                "<td><a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\">" +
+                "<td><a href=\"/product?id=" + id + "\" class=\"btn btn-dark\"> View </a></td>" +
+                "<td><a href=\"/basket?id=" + id + "\" class=\"btn btn-dark\">" +
                 "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket-fill\" viewBox=\"0 0 16 16\">" +
                 "  <path d=\"M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z\"/>" +
                 "</svg>" +
@@ -116,15 +116,29 @@ public class FoodProduct {
     public String toProductHTMLString() {
         return
 
-                "<h5 class=\"card-title\">" + SKU + "</h5>" + "<p class=\"card-text\"> " + description + "</p>" +
-                        "<a href=\"/basket?id=" + id + "\" class=\"btn btn-primary\">  " +
-
+                "<h5 class=\"card-title text-center\">" + SKU + "</h5>" +
+                        "<p class=\"card-text text-center\"> " + description + "</p>" +
+                        "<div class=\"container\">\n" +
+                        "  <div class=\"row\">\n" +
+                        "    <div class=\"col align-self-start\">\n" +
+                        "<a href=\"/basket?id=" + id + "\" class=\"btn btn-dark center\">  " +
                         "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket-fill\" viewBox=\"0 0 16 16\">" +
                         "  <path d=\"M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z\"/>" +
                         "</svg>" +
                         "  Add to Basket </a>" +
-                        "<br/><br/><br/>" +
-                        "<a href=\"/\" class=\"btn btn-primary\"> Home </a>";
+                        "    </div>\n" +
+                        "    <div class=\"col align-self-center\">\n" +
+                        "    </div>\n" +
+                        "    <div class=\"col align-self-end\">\n" +
+                        "<a href=\"/\" class=\"btn btn-dark text-center\"> Home </a>" +
+                        "    </div>\n" +
+                        "  </div>\n" +
+                        "</div>" +
+
+
+                        "<br/><br/><br/>";
+
+
     }
 
     public void setSKU(String SKU) {

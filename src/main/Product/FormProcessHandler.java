@@ -7,6 +7,9 @@ import main.Util;
 import java.io.*;
 import java.util.HashMap;
 
+/**
+ * This class adds the new customers data to the database.
+ */
 public class FormProcessHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(he.getRequestBody()));

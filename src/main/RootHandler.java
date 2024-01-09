@@ -49,14 +49,15 @@ public class RootHandler implements HttpHandler {
                         "  </head>" +
                         "<body>" +
 
-                       "<div class=\"card \">"+
-                        "      <img class=\"card-img\" src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\" alt=\"Card image\">"+
-                        "      <div class=\"card-img-overlay text-end\">"+
+                        "<div class=\"card \">" +
+                        "      <img class=\"card-img\" src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"  alt=\"Card image\">" +
+                        "      <div class=\"card-img-overlay text-end\">" +
                         "<h1 class=\"text-center\"> The Food Store !</h1>" +
-                        "    <nav class=\"navbar navbar-expand-lg bg-body-tertiary\">" +
+                        "    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">" +
                         "      <div class=\"container-fluid\">" +
                         "        <a class=\"navbar-brand\" href=\"/\">Food Store</a>" +
-                        "        <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">" +
+                        "        <button class=\"navbar-toggler\" type=\"button\" " +
+                        "data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">" +
                         "          <span class=\"navbar-toggler-icon\"></span>" +
                         "        </button>" +
                         "        <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">" +
@@ -65,16 +66,16 @@ public class RootHandler implements HttpHandler {
                         "              <a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Home</a>" +
                         "            </li>" +
                         "            <li class=\"nav-item\">" +
-                        "              <a class=\"nav-link\" href=\"#\">Customers</a>" +
+                        "              <a class=\"nav-link\" href=\"/customers\">Customers</a>" +
                         "            </li>" +
                         "            <li class=\"nav-item\">" +
-                        "              <a class=\"nav-link\" href=\"#\">Pricing</a>" +
+                        "              <a class=\"nav-link\" href=\"/stock\">Stock</a>" +
                         "            </li>" +
                         "            </li>" +
                         "          </ul>" +
-
-                        "<nav class=\"navbar bg-body-tertiary \">" +
-                        "      <div class=\"container-fluid\">" +
+                        "        </div>" +
+                        "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
+                        "      <div class=\"container-fluid \">" +
                         "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
                         "          <input" +
                         "            class=\"form-control me-2\"" +
@@ -87,13 +88,12 @@ public class RootHandler implements HttpHandler {
                         "        </form>" +
                         "      </div>" +
                         "    </nav>" +
-                        "        </div>" +
                         "      </div>" +
                         "    </nav>" +
 
                         "<div class=\"hstack gap-3\">" +
                         "<div class=\"dropdown\">" +
-                        "      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                        "      <button class=\"btn btn-success dropdown-toggle p-3 mt-2\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
                         "        Choose Category" +
                         "      </button>" +
                         "      <ul class=\"dropdown-menu\" style=\"\">" +
@@ -106,35 +106,40 @@ public class RootHandler implements HttpHandler {
                         "      </ul>" +
                         "    </div>" +
 
-                        "  <div class=\"p-2 ms-auto\">" +
-                        "</div>" +
-                        " <div class=\"vr\"></div>" +
-                        "<div class=\"p-2\">" +
-                        "<a href=\"/viewbasket\" class=\"btn btn-dark\"> " +
+                        "  <div class=\"p-2 ms-auto\">");
+        if (loggedInUser != null) {
+            out.write("<a href=\"/logout\" class=\"btn btn-dark p-3 mt-2\"> Log Out</a>");
+        } else {
+            out.write("<a href=\"/login\" class=\"btn btn-dark p-3 m-2\"> Log In</a>");
 
-                        "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket-fill\" viewBox=\"0 0 16 16\">" +
-                        "  <path d=\"M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z\"/>" +
-                        "</svg>" +
-                        "   Shopping Basket </a>" +
-                        "</div>" +
-                        "    </div >" +
-                        "<br>"+
-                        "<br>"+
-                        "        <h5 class=\"card-title h3 text-success\">Welcome to Food Store</h5>"+
-                        "        <p class=\"text-dark\">Wholesale Trade for your business!</p>"+
-                        "      </div>"+
-                        "    </div>"+
-        "<table class=\"table\">" +
-                        "<thead>" +
-                        "  <tr>" +
-                        "    <th>ID</th>" +
-                        "    <th>SKU</th>" +
-                        "    <th>Description</th>" +
-                        "    <th>Category</th>" +
-                        "    <th>Price</th>" +
-                        "  </tr>" +
-                        "</thead>" +
-                        "<tbody>");
+
+        }
+        out.write("</div>" +
+                " <div class=\"vr\"></div>" +
+                "<div class=\"p-2\">" +
+                "<a href=\"/viewbasket\" class=\"btn btn-dark mt-2 p-3\"> " +
+
+                "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket-fill\" viewBox=\"0 0 16 16\">" +
+                "  <path d=\"M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z\"/>" +
+                "</svg>" +
+                "   Shopping Basket </a>" +
+                "</div>" +
+                "    </div >" +
+                "<br>" +
+                "<br>" +
+                "        <h5 class=\"card-title h3 text-success\">Welcome to Food Store</h5>" +
+                "        <p class=\"text-dark\">Wholesale Trade for your business!</p>" +
+                "<table class=\"table  table-light table-striped\">" +
+                "<thead>" +
+                "  <tr>" +
+                "    <th>ID</th>" +
+                "    <th>SKU</th>" +
+                "    <th>Description</th>" +
+                "    <th>Category</th>" +
+                "    <th>Price</th>" +
+                "  </tr>" +
+                "</thead>" +
+                "<tbody>");
         for (FoodProduct p : allProducts) {
             if (Objects.equals(loggedInUser, "admin")) {
                 out.write(p.toHTMLString());
@@ -146,18 +151,22 @@ public class RootHandler implements HttpHandler {
                 "</tbody>" +
                         "</table>");
         if (Objects.equals(loggedInUser, "admin")) {
-            out.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
-                    "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>");
-            out.write("<a href=\"/stock\" class=\"btn btn-dark\"> Check Stock</a>");
+            out.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>"
+            );
         }
 
-        if (loggedInUser != null) {
-            out.write("<a href=\"/logout\" class=\"btn btn-dark\"> Log Out</a>");
-        } else {
-            out.write("<a href=\"/login\" class=\"btn btn-dark\"> Log In</a>");
+        out.write(
+                "<footer  class=\"text-center p-4 bg-dark text-light fixed-bottom\">" +
+                        "      <p>© Naureen Imran | Manchester Metropolitan University | <span id=\"currentYear\"></span></p>" +
+                        "<script>" +
+                        "        document.getElementById(\"currentYear\").innerHTML = new Date().getFullYear();" +
+                        "    </script>" +
+                        "  </footer>"
+        );
 
+        out.write("      </div>" +
+                "    </div>");
 
-        }
 
         out.write("</body>" +
                 "</html>"

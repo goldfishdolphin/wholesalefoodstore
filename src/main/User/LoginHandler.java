@@ -9,7 +9,12 @@ import java.io.OutputStreamWriter;
 
 
 public class LoginHandler implements HttpHandler {
-
+    /**
+     * This class takes input from the users to log-in
+     * @param he the exchange containing the request from the
+     *                 client and used to send the response
+     * @throws IOException
+     */
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
         BufferedWriter out = new BufferedWriter(
@@ -46,16 +51,6 @@ public class LoginHandler implements HttpHandler {
                         "        />" +
                         "        <div id=\"usernameHelp\" class=\"form-text\"></div>" +
                         "      </div>" +
-//                        "      <div class=\"mb-3\">" +
-//                        "        <label for=\"customer_id\" class=\"form-label\">Customer ID</label>" +
-//                        "        <input name=\"customer_id\"" +
-//                        "type=\"text\"" +
-//                        "          class=\"form-control\"" +
-//                        "          id=\"customer_id\"" +
-//                        "          aria-describedby=\"customeridHelp\"" +
-//                        "        />" +
-//                        "        <div id=\"customeridHelp\" class=\"form-text\"></div>" +
-//                        "      </div>" +
                         "      <div class=\"mb-3\">" +
                         "        <label for=\"exampleInputPassword1\" class=\"form-label\">Password</label>" +
                         "        <input name=\"password\"" +
@@ -66,8 +61,10 @@ public class LoginHandler implements HttpHandler {
                         "      </div>" +
                         "      <button type=\"submit\" class=\"btn btn-primary\">Submit</button>" +
                         "    </form>" +
+                        "<a href=\"/\" class=\"btn btn-dark\"> Home </a>"+
                         "  </body>" +
                         "</html>");
+
         out.close();
 
     }

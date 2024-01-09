@@ -10,7 +10,16 @@ import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+/**
+ * This class creates a display for a single food product.
+ */
 public class ProductHandler implements HttpHandler {
+    /**
+     *This method creates a web page to display a single product.
+     * @param he the exchange containing the request from the
+     *                 client and used to send the response
+     * @throws IOException
+     */
     public void handle(HttpExchange he) throws IOException {
         he.sendResponseHeaders(200, 0);
         BufferedWriter out = new BufferedWriter(
@@ -44,24 +53,39 @@ public class ProductHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "  <body" +
-                        "    class=\"p-3 m-0 border-0 bd-example m-0 border-0\"" +
-                        "    style=\"background-color: lightgreen\"" +
+                        "    class=\"p-3 m-0 border-0 bd-example m-0 border-0 position-relative\"" +
+                        "    style=\"background-color: green\"" +
                         "  >" );
-//        String image1 =
 
-        out.write(                "    <div class=\"card\" style=\"width: 18rem\">" +
+        out.write(
+                "    <div class=\"card position-absolute top-50 start-50 translate-middle\"  style=\"width: 50rem\">" +
                         "      <img" +
-                        "        src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"" +
+                        "        src=\"https://cdn.pixabay.com/photo/2020/05/25/02/35/groceries-5216715_1280.jpg\"" +
                         "        class=\"card-img-top\"" +
                         "        alt=\"fruit\"" +
                         "      />" +
-                        "      <div class=\"card-body\">");
+                        "      <div class=\"card-body\">"
+        );
         out.write(product.toProductHTMLString());
 
-        out.write(
+        out.write(               " <div>" +
+
+                "    </div>" +
+
                 "      </div>" +
+                "<br/>"+
+                "<footer  class=\"text-center p-4 bg-dark text-light \">" +
+                "      <p>© Naureen Imran |Manchester Metropolitan University| <span id=\"currentYear\"></span></p>" +
+                "<script>" +
+                "        document.getElementById(\"currentYear\").innerHTML = new Date().getFullYear();" +
+                "    </script>" +
+                "  </footer>"+
+
                         "    </div>" +
+                        "    </div>" +
+
                         "  </body>" +
+
                         "</html>"
         );
         out.close();

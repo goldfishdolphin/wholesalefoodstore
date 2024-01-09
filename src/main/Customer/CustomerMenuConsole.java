@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * This is the customer menu console to add, view, delete, edit the customer.
+ */
 public class CustomerMenuConsole {
     CustomerDAO customers = new CustomerDAO();
 

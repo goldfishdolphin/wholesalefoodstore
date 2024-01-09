@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * This class deletes a customer and refreshes the page.
+ */
 public class DeleteCustomerHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         CustomerDAO customers = new CustomerDAO();
@@ -28,7 +31,7 @@ public class DeleteCustomerHandler implements HttpHandler {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        he.getResponseHeaders().set("Location", "/");
+        he.getResponseHeaders().set("Location", "/customers");
         he.sendResponseHeaders(302, 0);
         he.getResponseBody().close();
     }

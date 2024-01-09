@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class creates a user.
+ */
 public class UserDAO {
     private Connection connect() throws SQLException {
 

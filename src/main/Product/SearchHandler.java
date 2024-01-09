@@ -13,7 +13,16 @@ import java.util.*;
 
 import static main.Util.getCurrentSessionId;
 
+/**
+ * This class object searches the products.
+ */
 public class SearchHandler implements HttpHandler {
+    /**
+     * This method responds with search results.
+     * @param he the exchange containing the request from the
+     *                 client and used to send the response
+     * @throws IOException
+     */
     public void handle(HttpExchange he) throws IOException {
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
@@ -45,18 +54,39 @@ public class SearchHandler implements HttpHandler {
             he.getResponseHeaders().set("Content-Type", "text/html");
             he.sendResponseHeaders(200, 0);
 
-
             pw.println(
                     "<html>" +
                             "<head> <title>The Food Store</title> " +
                             "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css\" integrity=\"sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2\" crossorigin=\"anonymous\">"
                             +
                             "</head>" +
-                            "<body style={background-color:grey;}>" +
-                            "<h1> Food Products !</h1>" +
-                            "<nav class=\"navbar bg-body-tertiary\">" +
+                            "<div class=\"card \">" +
+                            "      <img class=\"card-img\" src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"  alt=\"Card image\">" +
+                            "      <div class=\"card-img-overlay text-end\">" +
+                            "<h1 class=\"text-center\"> The Food Store !</h1>" +
+                            "    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">" +
                             "      <div class=\"container-fluid\">" +
-
+                            "        <a class=\"navbar-brand\" href=\"/\">Food Store</a>" +
+                            "        <button class=\"navbar-toggler\" type=\"button\" " +
+                            "data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">" +
+                            "          <span class=\"navbar-toggler-icon\"></span>" +
+                            "        </button>" +
+                            "        <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">" +
+                            "          <ul class=\"navbar-nav\">" +
+                            "            <li class=\"nav-item\">" +
+                            "              <a class=\"nav-link\" href=\"/\">Home</a>" +
+                            "            </li>" +
+                            "            <li class=\"nav-item\">" +
+                            " <a class=\"nav-link\" href=\"/customers\">Customers</a>" +
+                            "            </li>" +
+                            "            <li class=\"nav-item\">" +
+                            "<a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Stock</a>" +
+                            "            </li>" +
+                            "            </li>" +
+                            "          </ul>" +
+                            "        </div>" +
+                            "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
+                            "      <div class=\"container-fluid \">" +
                             "<form class=\"d-flex\" method=\"GET\" action=\"/search\">" +
                             "          <input" +
                             "            class=\"form-control me-2\"" +
@@ -69,6 +99,10 @@ public class SearchHandler implements HttpHandler {
                             "        </form>" +
                             "      </div>" +
                             "    </nav>" +
+                            "      </div>" +
+                            "    </nav>" +
+
+
                             "<table class=\"table\">" +
                             "<thead>" +
                             "  <tr>" +
@@ -90,16 +124,6 @@ public class SearchHandler implements HttpHandler {
             pw.write(
                     "</tbody>" +
                             "</table>");
-            if (Objects.equals(loggedInUser, "admin")) {
-                pw.write("<a href=\"/add\" class=\"btn btn-dark\"> Add New Product </a>" +
-                        "<a href=\"/customers\" class=\"btn btn-dark\"> Customer</a>");
-            }
-
-            if (loggedInUser != null) {
-                pw.write("<a href=\"/logout\" class=\"btn btn-dark\"> Log Out</a>");
-            } else {
-                pw.write("<a href=\"/login\" class=\"btn btn-dark\"> Log In</a>");
-            }
 
             pw.write("</body>" +
                     "</html>"

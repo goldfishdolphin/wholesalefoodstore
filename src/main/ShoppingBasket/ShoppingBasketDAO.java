@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is a data access object to build a connection with database.
+ */
 public class ShoppingBasketDAO {
     private Connection connect() throws SQLException {
         String dbURL = "jdbc:sqlite:foodstore.sql";
