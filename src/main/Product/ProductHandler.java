@@ -2,6 +2,7 @@ package main.Product;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import main.User.SessionManager;
 import main.Util;
 
 import java.io.BufferedWriter;
@@ -9,6 +10,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Objects;
+
+import static main.Util.getCurrentSessionId;
 
 /**
  * This class creates a display for a single food product.
@@ -24,7 +28,15 @@ public class ProductHandler implements HttpHandler {
         he.sendResponseHeaders(200, 0);
         BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(he.getResponseBody()));
+        String sessionId = getCurrentSessionId(he);
 
+        String loggedInUser = null;
+        if (sessionId != null) {
+            loggedInUser = SessionManager.getLoggedInUser(sessionId);
+            System.out.println("Logged in as: " + loggedInUser);
+        } else {
+            System.out.println("No Session ID found.");
+        }
         String request = he.getRequestURI().getQuery();
         HashMap<String, String> map = Util.requestStringToMap(request);
 
@@ -66,9 +78,14 @@ public class ProductHandler implements HttpHandler {
                         "      />" +
                         "      <div class=\"card-body\">"
         );
-        out.write(product.toProductHTMLString());
+        if (Objects.equals(loggedInUser, "admin")) {
+        out.write(product.toAdminHTMLString());
+        }else {
+            out.write(product.toProductHTMLString());
+        }
 
-        out.write(               " <div>" +
+
+        out.write( " <div>" +
 
                 "    </div>" +
 

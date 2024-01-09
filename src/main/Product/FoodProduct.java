@@ -140,7 +140,20 @@ public class FoodProduct {
 
 
     }
+    public String toAdminHTMLString() {
+        return
+                "<h5 class=\"card-title text-center\">" + SKU + "</h5>" +
+                        "<p class=\"card-text text-center\"> " + description + "</p>" +
+                        "<div class=\"container\">\n" +
+                        "  <div class=\"row\">\n" +
+                        "    <div class=\"col align-self-start\">\n" +
+                        "<a href=\"/\" class=\"btn btn-dark text-center\"> Home </a>" +
+                        "    </div>\n" +
+                        "  </div>\n" +
+                        "</div>" ;
 
+
+    }
     public void setSKU(String SKU) {
         this.SKU = SKU;
     }

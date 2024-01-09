@@ -49,12 +49,11 @@ public class BasketViewHandler implements HttpHandler {
                         "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>" +
                         "  </head>" +
                         "<body>" +
-                        "<h1> Shopping Basket !</h1>" +
 
                         "<div class=\"card \">" +
                         "      <img class=\"card-img\" src=\"https://cdn.pixabay.com/photo/2017/08/05/12/33/flat-lay-2583213_1280.jpg\"  alt=\"Card image\">" +
                         "      <div class=\"card-img-overlay text-end\">" +
-                        "<h1 class=\"text-center\"> The Food Store !</h1>" +
+                        "<h1 class=\"text-center\"> Shopping basket !</h1>" +
                         "    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">" +
                         "      <div class=\"container-fluid\">" +
                         "        <a class=\"navbar-brand\" href=\"/\">Food Store</a>" +
