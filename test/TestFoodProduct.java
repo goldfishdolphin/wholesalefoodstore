@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 /**
  * This class tests the Data Access Object of the Food Product class.
  */
-class TestFoodProduct {
+public class TestFoodProduct {
     @Test
     void testListProductOnSpy() {
         //Arrange

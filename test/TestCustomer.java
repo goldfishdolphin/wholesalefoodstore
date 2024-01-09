@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 /**
  * This class tests the Data Access Object of the Customer class.
  */
-class TestCustomer {
+public class TestCustomer {
     @Test
     void testGetAllCustomerList()  {
         // Arrange

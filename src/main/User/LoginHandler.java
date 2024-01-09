@@ -7,7 +7,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-
+/**
+ * This class creates an input form for the login interface.
+ */
 public class LoginHandler implements HttpHandler {
     /**
      * This class takes input from the users to log-in

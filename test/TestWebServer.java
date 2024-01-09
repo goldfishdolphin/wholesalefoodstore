@@ -21,6 +21,9 @@ import static org.mockito.Mockito.verify;
  * This class tests different paths at http server using JUnit and mockito.
  */
 public class TestWebServer {
+    /**
+     * This method tests http server.
+     */
     @Test
     public void httpServer() {
         HttpServer httpServer = mock(HttpServer.class);

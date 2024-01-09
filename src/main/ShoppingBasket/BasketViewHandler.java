@@ -67,13 +67,6 @@ public class BasketViewHandler implements HttpHandler {
                         "            <li class=\"nav-item\">" +
                         "              <a class=\"nav-link\" href=\"/\">Home</a>" +
                         "            </li>" +
-                        "            <li class=\"nav-item\">" +
-                        " <a class=\"nav-link\" href=\"/customers\">Customers</a>" +
-                        "            </li>" +
-                        "            <li class=\"nav-item\">" +
-                        "<a class=\"nav-link  href=\"/stock\">Stock</a>" +
-                        "            </li>" +
-                        "            </li>" +
                         "          </ul>" +
                         "        </div>" +
                         "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
@@ -119,6 +112,12 @@ public class BasketViewHandler implements HttpHandler {
                         "<a href=\"/\" class=\"btn btn-success\"> Continue Shopping</a>" +
                         "<a href=\"/checkout\" class=\"btn btn-dark\">Check Out</a>" +
                         "<a href=\"/clear\" class=\"btn btn-danger\">Clear Basket</a>" +
+                        "<footer  class=\"text-center p-4 bg-dark text-light fixed-bottom\">" +
+                        "      <p>© Naureen Imran | Manchester Metropolitan University | <span id=\"currentYear\"></span></p>" +
+                        "<script>" +
+                        "        document.getElementById(\"currentYear\").innerHTML = new Date().getFullYear();" +
+                        "    </script>" +
+                        "  </footer>"+
                         "</body>" +
                         "</html>"
         );

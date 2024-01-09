@@ -3,6 +3,9 @@ package main.User;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * This class creates a user object.
+ */
 public class User{
     private int userID;
     private String username;

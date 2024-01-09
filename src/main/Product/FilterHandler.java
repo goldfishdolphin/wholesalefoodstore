@@ -79,13 +79,6 @@ public class FilterHandler implements HttpHandler {
                             "            <li class=\"nav-item\">" +
                             "              <a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Home</a>" +
                             "            </li>" +
-                            "            <li class=\"nav-item\">" +
-                            "              <a class=\"nav-link\" href=\"/customers\">Customers</a>" +
-                            "            </li>" +
-                            "            <li class=\"nav-item\">" +
-                            "              <a class=\"nav-link\" href=\"/stock\">Stock</a>" +
-                            "            </li>" +
-                            "            </li>" +
                             "          </ul>" +
                             "        </div>" +
                             "<nav class=\"navbar bg-body-tertiary navbar-dark bg-dark \">" +
